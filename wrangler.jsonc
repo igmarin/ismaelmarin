@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "my-site",
+  "name": "me",
   "main": "src/index.tsx",
   "compatibility_date": "2026-04-13"
   // "compatibility_flags": [
