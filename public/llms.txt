@@ -1,0 +1,60 @@
+# Ismael Marin — Tech Lead & AI Engineer
+
+> Tech Lead and Senior Software Engineer with 20 years building software remotely. Specialized in Ruby on Rails, AI integrations, and agent-based workflows. Based in Leon, Mexico.
+
+## Person
+
+- **Name**: Ismael Guillermo Marin Cabrera (Ismael G. Marin, Ismael Marin)
+- **Role**: Tech Lead, Senior Software Engineer, AI Engineer
+- **Experience**: 20 years building software — all remote
+- **Focus**: Ruby on Rails + AI tooling — building the systems that make AI genuinely useful for engineering teams
+- **Location**: Leon, Mexico
+- **Email**: ismael.marin@gmail.com
+- **Phone**: +52 477 792 9000
+
+## Open Source Projects
+
+### rails-ai-bridge
+- **URL**: https://ismaelmarin.dev/rails-ai-bridge-site/
+- **GitHub**: https://github.com/igmarin/rails-ai-bridge
+- **RubyGems**: https://rubygems.org/gems/rails-ai-bridge
+- **Description**: Turn any Rails app into an AI-ready codebase — one command, zero config. Generates static context files (CLAUDE.md, AGENTS.md, .cursorrules, copilot-instructions.md) and runs a live MCP server for real-time Rails introspection.
+
+### rails-agent-skills
+- **URL**: https://ismaelmarin.dev/rails-agent-skills-site/
+- **GitHub**: https://github.com/igmarin/rails-agent-skills
+- **Description**: Curated AI agent skill library for Ruby on Rails development. 41 executable skills and 9 workflows teaching AI coding tools how to plan, test, implement, document, and review Rails work using production-minded conventions. Tests gate implementation.
+
+### ruby-skill-bench
+- **URL**: https://ismaelmarin.dev/ruby-skill-bench/
+- **GitHub**: https://github.com/igmarin/ruby-skill-bench
+- **RubyGems**: https://rubygems.org/gems/ruby-skill-bench
+- **Description**: High-fidelity evaluation engine for benchmarking AI agent skills. Runs an agent twice (baseline vs. with skill), then uses a blind LLM judge to score both outputs across 5 dimensions. The difference is the skill's measurable ROI.
+
+## Services
+
+- **AI Integration & Tooling**: Integrate LLMs into existing Rails monoliths, build MCP servers, setup agent-based workflows
+- **Staff Augmentation**: Senior/Lead level feature development, driving complex technical initiatives from PRD to production
+- **Architecture Consulting**: System design, performance optimization, ADR authoring for scaling Ruby on Rails applications
+
+## Tech Stack
+
+- **Core**: Ruby on Rails, PostgreSQL, Redis, Go, Docker, AWS, CircleCI
+- **AI & Tooling**: Claude (Anthropic), OpenAI Codex, MCP, Cursor, GitHub Copilot
+- **Architecture**: Domain-Driven Design, TDD / RSpec, GraphQL, Agentic AI Systems
+
+## Writing
+
+Articles on Medium covering Rails, AI engineering, and software architecture:
+
+- [Your JSON Column Is Not a Settings System](https://medium.com/@igmarin/your-json-column-is-not-a-settings-system-4b7dc46e747f)
+- [The Engineer Who Understands the Product Will Always Win](https://medium.com/@igmarin/the-engineer-who-understands-the-product-will-always-win-1b073585915c)
+- [Beyond Vibe Coding: How rails-ai-bridge Achieved "Semantic Parity"](https://medium.com/@igmarin/beyond-vibe-coding-how-rails-ai-bridge-v2-2-0-6e970d2cfd55)
+- [Stop "Vibe Coding": How I Bridged the Gap Between Rails and AI](https://medium.com/@igmarin/stop-vibe-coding-how-i-bridged-the-gap-between-rails-and-ai-063eaf0a0304)
+
+## Profiles
+
+- **LinkedIn**: https://linkedin.com/in/ismaelmarin
+- **GitHub**: https://github.com/igmarin
+- **Medium**: https://medium.com/@igmarin
+- **RubyGems**: https://rubygems.org/profiles/igmarin

@@ -1,0 +1,46 @@
+# Rails Agent Skills
+
+> A curated library of 41 executable skills and 9 workflows that teach AI coding tools how to plan, test, implement, document, and review Rails work using production-minded conventions.
+
+Rails Agent Skills provides structured SKILL.md files that give coding agents the context, conventions, and discipline to generate production-quality Rails code. Compatible with Claude Code, Cursor, Codex, and Windsurf.
+
+## Core principles
+
+- **Tests gate implementation** — Agents cannot write implementation code until the test exists, runs, and fails for the right reason
+- **Workflow chaining** — Skills name the next skill to load in their Integration table. Skills are building blocks; workflows are the value
+- **Atomic** — One skill per concern. No monolithic guides
+- **Gated** — Hard gates enforce discipline at every checkpoint
+
+## Skill categories (41 skills)
+
+- **Planning**: create-prd, generate-tasks, plan-tickets
+- **Testing**: plan-tests, write-tests, test-service, triage-bug
+- **Code Quality**: code-review, security-check, refactor-code, apply-code-conventions, apply-stack-conventions
+- **Architecture & DDD**: define-domain-language, review-domain-boundaries, model-domain, review-architecture
+- **Rails Implementation**: create-service-object, implement-background-job, implement-authorization, implement-hotwire
+- **APIs & Engines**: implement-graphql, integrate-api-client, version-api, create-engine, test-engine
+
+## Workflows (9 callable)
+
+- tdd — Full TDD feature cycle
+- quality — Pre-PR quality check
+- review — Systematic PR review
+- engine — Engine development loop
+- bug-fix — Bug triage and fix
+- graphql — GraphQL feature development
+- migration — Safe migration workflow
+- background-job — Background job implementation
+- setup — New project onboarding
+
+## Integration paths
+
+1. **MCP Server** — Agent discovers skills via `list_skills` and loads them on demand via `use_skill`
+2. **Chat Commands** — Force the agent to use a specific skill (prepend with `@` in Cursor/Windsurf)
+3. **GitHub CLI** — `gh skill install igmarin/rails-agent-skills`
+
+## Links
+
+- **Homepage**: https://ismaelmarin.dev/rails-agent-skills-site/
+- **GitHub**: https://github.com/igmarin/rails-agent-skills
+- **MCP Docker**: https://hub.docker.com/r/igmarin/rails-agent-skills-mcp
+- **Author**: https://ismaelmarin.dev/
