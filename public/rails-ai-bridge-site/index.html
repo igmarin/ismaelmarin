@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rails-ai-bridge — Give Your AI a Map of Your Rails App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FDF8F0',
+            ink: '#1C1917',
+            rust: '#B85C38',
+            teal: '#2D6B6B',
+            warmgray: '#E8E0D5',
+            softgray: '#9C948A',
+            lightrust: '#F3E8E0',
+            lightteal: '#E0EDED',
+          },
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FDF8F0;
+      color: #1C1917;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .section-desktop {
+      min-height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+      .section-desktop {
+        min-height: auto;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+    }
+
+    .diagram-box {
+      filter: drop-shadow(0 1px 2px rgba(28, 25, 23, 0.06));
+    }
+
+    .code-block {
+      font-family: 'Bricolage Grotesque', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+    }
+
+    .serif-display {
+      font-family: 'Instrument Serif', serif;
+    }
+
+    .step-connector {
+      stroke-dasharray: 6 4;
+    }
+
+    /* Shared navigation */
+    .shared-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(253, 248, 240, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(232, 224, 213, 0.5);
+    }
+    .shared-nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      color: #1C1917;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+    .shared-nav-logo span { color: #B85C38; }
+    .shared-nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .shared-nav-links a {
+      color: #9C948A;
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .shared-nav-links a:hover { color: #B85C38; }
+    @media (max-width: 768px) { .shared-nav-links { display: none; } }
+  </style>
+</head>
+<body class="antialiased" style="padding-top: 56px;">
+
+  <nav class="shared-nav">
+    <a href="/" class="shared-nav-logo">ismael<span>.marin</span></a>
+    <ul class="shared-nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/ruby-skill-bench/">ruby-skill-bench</a></li>
+      <li><a href="/rails-ai-bridge-site/">rails-ai-bridge</a></li>
+      <li><a href="/rails-agent-skills-site/">rails-agent-skills</a></li>
+      <li><a href="/#writing">Writing</a></li>
+      <li><a href="/#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <p class="text-rust font-medium text-sm tracking-widest uppercase mb-6">rails-ai-bridge</p>
+          <h1 class="serif-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-ink mb-8">
+            Stop letting AI<br>guess your Rails app.
+          </h1>
+          <p class="text-lg md:text-xl text-ink/80 leading-relaxed max-w-xl mb-10">
+            AI coding assistants work better when they know your app's actual structure.
+            This gem gives them a map — so they write code that fits your conventions,
+            not generic Rails patterns.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <span class="inline-block bg-rust text-white px-5 py-2.5 rounded-full text-sm font-medium">Zero config</span>
+            <span class="inline-block bg-teal text-white px-5 py-2.5 rounded-full text-sm font-medium">Read-only</span>
+            <span class="inline-block bg-ink text-white px-5 py-2.5 rounded-full text-sm font-medium">Open source</span>
+          </div>
+        </div>
+        <div class="hidden lg:flex justify-center items-center">
+          <svg viewBox="0 0 420 320" class="w-full max-w-md" role="img" aria-label="A bridge connecting a Rails application to AI assistants">
+            <!-- Rails app box -->
+            <rect x="20" y="110" width="110" height="100" rx="12" fill="#E0EDED" stroke="#2D6B6B" stroke-width="2"/>
+            <text x="75" y="148" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="13" font-weight="600" fill="#1C1917">Your Rails</text>
+            <text x="75" y="168" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="13" font-weight="600" fill="#1C1917">App</text>
+
+            <!-- Bridge -->
+            <path d="M 135 140 Q 210 100 290 140" fill="none" stroke="#B85C38" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 135 180 Q 210 220 290 180" fill="none" stroke="#B85C38" stroke-width="4" stroke-linecap="round"/>
+            <rect x="190" y="125" width="42" height="24" rx="6" fill="#FDF8F0" stroke="#B85C38" stroke-width="1.5"/>
+            <text x="211" y="140" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" font-weight="600" fill="#B85C38">bridge</text>
+
+            <!-- AI assistants -->
+            <rect x="295" y="60" width="105" height="42" rx="10" fill="#F3E8E0" stroke="#B85C38" stroke-width="1.5"/>
+            <text x="347" y="75" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="11" font-weight="500" fill="#1C1917">Claude Code</text>
+            <text x="347" y="90" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="9" fill="#9C948A">static file</text>
+
+            <rect x="295" y="115" width="105" height="42" rx="10" fill="#F3E8E0" stroke="#B85C38" stroke-width="1.5"/>
+            <text x="347" y="130" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="11" font-weight="500" fill="#1C1917">Cursor</text>
+            <text x="347" y="145" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="9" fill="#9C948A">MCP tools</text>
+
+            <rect x="295" y="170" width="105" height="42" rx="10" fill="#F3E8E0" stroke="#B85C38" stroke-width="1.5"/>
+            <text x="347" y="185" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="11" font-weight="500" fill="#1C1917">Copilot</text>
+            <text x="347" y="200" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="9" fill="#9C948A">both layers</text>
+
+            <rect x="295" y="225" width="105" height="42" rx="10" fill="#F3E8E0" stroke="#B85C38" stroke-width="1.5"/>
+            <text x="347" y="240" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="11" font-weight="500" fill="#1C1917">Codex</text>
+            <text x="347" y="255" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="9" fill="#9C948A">AGENTS.md</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20 bg-warmgray/30">
+    <div class="max-w-6xl mx-auto w-full">
+      <p class="text-rust font-medium text-sm tracking-widest uppercase mb-4">The problem</p>
+      <h2 class="serif-display text-4xl md:text-5xl lg:text-6xl text-ink mb-12 max-w-3xl">
+        AI without context makes expensive guesses.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Before -->
+        <div class="bg-paper rounded-2xl p-8 border border-warmgray">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-full bg-softgray/30 flex items-center justify-center text-ink font-bold text-sm">1</div>
+            <h3 class="text-lg font-semibold text-ink">Without a map</h3>
+          </div>
+          <ul class="space-y-4 text-ink/80 leading-relaxed">
+            <li class="flex gap-3">
+              <span class="text-softgray mt-0.5">—</span>
+              <span>Guesses table names that do not match your conventions</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-softgray mt-0.5">—</span>
+              <span>Misses custom associations, scopes, and callbacks</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-softgray mt-0.5">—</span>
+              <span>Wastes tokens rediscovering structure you already have</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-softgray mt-0.5">—</span>
+              <span>Generates generic Rails code that does not fit your patterns</span>
+            </li>
+          </ul>
+          <div class="mt-8 pt-6 border-t border-warmgray">
+            <p class="text-sm text-softgray">Result: slower responses, more corrections, higher token bills.</p>
+          </div>
+        </div>
+
+        <!-- After -->
+        <div class="bg-paper rounded-2xl p-8 border-2 border-teal">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-full bg-teal flex items-center justify-center text-white font-bold text-sm">2</div>
+            <h3 class="text-lg font-semibold text-ink">With rails-ai-bridge</h3>
+          </div>
+          <ul class="space-y-4 text-ink/80 leading-relaxed">
+            <li class="flex gap-3">
+              <span class="text-teal mt-0.5">—</span>
+              <span>Knows your exact schema, routes, and model relationships</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-teal mt-0.5">—</span>
+              <span>Understands your team conventions and architecture</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-teal mt-0.5">—</span>
+              <span>Drills into specifics on demand via live MCP tools</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-teal mt-0.5">—</span>
+              <span>Writes code that actually fits your codebase</span>
+            </li>
+          </ul>
+          <div class="mt-8 pt-6 border-t border-warmgray">
+            <p class="text-sm text-teal font-medium">Result: faster first useful response, fewer corrections.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Mental Model -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20">
+    <div class="max-w-6xl mx-auto w-full">
+      <p class="text-rust font-medium text-sm tracking-widest uppercase mb-4">The mental model</p>
+      <h2 class="serif-display text-4xl md:text-5xl lg:text-6xl text-ink mb-6 max-w-3xl">
+        Two layers. One purpose.
+      </h2>
+      <p class="text-lg text-ink/70 max-w-2xl mb-14">
+        Think of it as giving your AI both a guidebook and a librarian.
+        The guidebook sets orientation. The librarian answers follow-up questions.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Layer 1: Static -->
+        <div class="relative">
+          <div class="absolute -top-3 left-6 bg-rust text-white text-xs font-bold px-3 py-1 rounded-full">LAYER 1</div>
+          <div class="bg-lightrust rounded-2xl p-8 pt-10">
+            <h3 class="text-2xl font-bold text-ink mb-3">Static context files</h3>
+            <p class="text-ink/70 mb-6 leading-relaxed">
+              Compact, assistant-specific files generated once and committed to your repo.
+              They give the AI passive orientation every time a session starts.
+            </p>
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-rust font-mono text-sm font-medium">CLAUDE.md</span>
+                <span class="text-softgray text-sm">for Claude Code</span>
+              </div>
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-rust font-mono text-sm font-medium">AGENTS.md</span>
+                <span class="text-softgray text-sm">for OpenAI Codex</span>
+              </div>
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-rust font-mono text-sm font-medium">.cursorrules</span>
+                <span class="text-softgray text-sm">for Cursor</span>
+              </div>
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-rust font-mono text-sm font-medium">.github/copilot-instructions.md</span>
+                <span class="text-softgray text-sm">for Copilot</span>
+              </div>
+            </div>
+            <p class="text-sm text-softgray mt-5">≤ 150 lines each. Compact by default.</p>
+          </div>
+        </div>
+
+        <!-- Layer 2: Live -->
+        <div class="relative">
+          <div class="absolute -top-3 left-6 bg-teal text-white text-xs font-bold px-3 py-1 rounded-full">LAYER 2</div>
+          <div class="bg-lightteal rounded-2xl p-8 pt-10">
+            <h3 class="text-2xl font-bold text-ink mb-3">Live MCP tools</h3>
+            <p class="text-ink/70 mb-6 leading-relaxed">
+              A read-only server that answers exact questions on demand.
+              The AI calls these only when it needs a specific detail.
+            </p>
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-teal font-mono text-sm font-medium">rails_get_schema</span>
+                <span class="text-softgray text-sm">tables, columns, indexes</span>
+              </div>
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-teal font-mono text-sm font-medium">rails_get_model_details</span>
+                <span class="text-softgray text-sm">associations, validations, scopes</span>
+              </div>
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-teal font-mono text-sm font-medium">rails_get_routes</span>
+                <span class="text-softgray text-sm">HTTP verbs, paths, actions</span>
+              </div>
+              <div class="flex items-center gap-3 bg-paper rounded-lg px-4 py-3 border border-warmgray">
+                <span class="text-teal font-mono text-sm font-medium">rails_search_code</span>
+                <span class="text-softgray text-sm">ripgrep across your codebase</span>
+              </div>
+            </div>
+            <p class="text-sm text-softgray mt-5">11 built-in tools. All read-only.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: How It Works -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20 bg-warmgray/30">
+    <div class="max-w-6xl mx-auto w-full">
+      <p class="text-rust font-medium text-sm tracking-widest uppercase mb-4">How it works</p>
+      <h2 class="serif-display text-4xl md:text-5xl lg:text-6xl text-ink mb-14 max-w-3xl">
+        Introspect. Generate. Serve.
+      </h2>
+
+      <!-- Flow diagram -->
+      <div class="flex justify-center mb-14">
+        <svg viewBox="0 0 800 200" class="w-full max-w-3xl" role="img" aria-label="Three-step flow: Introspect, Generate, Serve">
+          <!-- Step 1 -->
+          <rect x="30" y="60" width="200" height="80" rx="14" fill="#E0EDED" stroke="#2D6B6B" stroke-width="2"/>
+          <text x="130" y="85" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="12" font-weight="600" fill="#1C1917">Introspect</text>
+          <text x="130" y="105" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#1C1917">Scan schema, models,</text>
+          <text x="130" y="120" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#1C1917">routes, controllers, gems</text>
+
+          <!-- Arrow 1 -->
+          <line x1="235" y1="100" x2="305" y2="100" stroke="#B85C38" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="305,100 295,94 295,106" fill="#B85C38"/>
+
+          <!-- Step 2 -->
+          <rect x="310" y="60" width="200" height="80" rx="14" fill="#F3E8E0" stroke="#B85C38" stroke-width="2"/>
+          <text x="410" y="85" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="12" font-weight="600" fill="#1C1917">Generate</text>
+          <text x="410" y="105" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#1C1917">Write assistant-specific</text>
+          <text x="410" y="120" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#1C1917">context files</text>
+
+          <!-- Arrow 2 -->
+          <line x1="515" y1="100" x2="585" y2="100" stroke="#B85C38" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="585,100 575,94 575,106" fill="#B85C38"/>
+
+          <!-- Step 3 -->
+          <rect x="590" y="60" width="180" height="80" rx="14" fill="#E0EDED" stroke="#2D6B6B" stroke-width="2"/>
+          <text x="680" y="85" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="12" font-weight="600" fill="#1C1917">Serve</text>
+          <text x="680" y="105" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#1C1917">Run MCP server</text>
+          <text x="680" y="120" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#1C1917">with read-only tools</text>
+
+          <!-- Output branches -->
+          <line x1="410" y1="140" x2="410" y2="160" stroke="#9C948A" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="130" y1="160" x2="680" y2="160" stroke="#9C948A" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+          <!-- Static files label -->
+          <line x1="130" y1="160" x2="130" y2="170" stroke="#9C948A" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="60" y="170" width="140" height="24" rx="6" fill="#FDF8F0" stroke="#B85C38" stroke-width="1"/>
+          <text x="130" y="185" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#B85C38">Static files</text>
+
+          <!-- MCP server label -->
+          <line x1="680" y1="160" x2="680" y2="170" stroke="#9C948A" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="610" y="170" width="140" height="24" rx="6" fill="#FDF8F0" stroke="#2D6B6B" stroke-width="1"/>
+          <text x="680" y="185" text-anchor="middle" dominant-baseline="middle" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#2D6B6B">MCP server</text>
+        </svg>
+      </div>
+
+      <!-- Details -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <h4 class="font-semibold text-ink mb-2">Introspect</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            Up to 27 built-in scanners read your app: schema, models, routes, controllers, gems, tests, conventions, views, Turbo, Stimulus, auth, API, DevOps, and more.
+          </p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <h4 class="font-semibold text-ink mb-2">Generate</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            <code class="text-rust font-mono text-xs">rails ai:bridge</code> writes compact files tailored to each AI tool's format and size limits. Split rules keep per-file guidance focused.
+          </p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <h4 class="font-semibold text-ink mb-2">Serve</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            <code class="text-teal font-mono text-xs">rails ai:serve</code> starts an MCP server Claude Code and Cursor auto-detect. Supports stdio and HTTP transports.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Concrete Example -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20">
+    <div class="max-w-6xl mx-auto w-full">
+      <p class="text-rust font-medium text-sm tracking-widest uppercase mb-4">Concrete example</p>
+      <h2 class="serif-display text-4xl md:text-5xl lg:text-6xl text-ink mb-6 max-w-3xl">
+        What your AI actually sees.
+      </h2>
+      <p class="text-lg text-ink/70 max-w-2xl mb-14">
+        Here is how a tool call works in practice. Start broad, then drill in.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Example 1: Summary -->
+        <div class="bg-ink rounded-2xl p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="bg-rust text-white text-xs font-bold px-2.5 py-1 rounded">REQUEST</span>
+            <span class="text-warmgray font-mono text-sm">rails_get_schema</span>
+          </div>
+          <pre class="code-block text-warmgray/90 overflow-x-auto"><code>{"detail": "summary"}</code></pre>
+
+          <div class="flex items-center gap-3 my-5">
+            <span class="bg-teal text-white text-xs font-bold px-2.5 py-1 rounded">RESPONSE</span>
+          </div>
+          <pre class="code-block text-warmgray/90 overflow-x-auto"><code>users ............... 12 columns
+orders .............. 8 columns
+order_items ......... 6 columns
+products ............ 14 columns
+categories .......... 4 columns</code></pre>
+          <p class="text-sm text-softgray mt-4">The AI gets oriented fast without drowning in detail.</p>
+        </div>
+
+        <!-- Example 2: Drill-in -->
+        <div class="bg-ink rounded-2xl p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="bg-rust text-white text-xs font-bold px-2.5 py-1 rounded">REQUEST</span>
+            <span class="text-warmgray font-mono text-sm">rails_get_model_details</span>
+          </div>
+          <pre class="code-block text-warmgray/90 overflow-x-auto"><code>{"model": "Order"}</code></pre>
+
+          <div class="flex items-center gap-3 my-5">
+            <span class="bg-teal text-white text-xs font-bold px-2.5 py-1 rounded">RESPONSE</span>
+          </div>
+          <pre class="code-block text-warmgray/90 overflow-x-auto"><code>belongs_to :user
+has_many :order_items
+dependent: :destroy
+
+validates :total, numericality: { &gt;= 0 }
+scope :pending, -&gt; { where(status: 'pending') }
+enum status: { pending: 0, paid: 1, shipped: 2 }</code></pre>
+          <p class="text-sm text-softgray mt-4">Exact details, only when needed. No hallucinated columns.</p>
+        </div>
+      </div>
+
+      <!-- Semantic tier callout -->
+      <div class="mt-10 bg-lightrust rounded-2xl p-6 md:p-8 border border-rust/20">
+        <h4 class="font-semibold text-ink mb-2">Semantic model tiering</h4>
+        <p class="text-ink/70 leading-relaxed mb-4">
+          Models are classified by importance so the AI knows where to focus first:
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-rust text-white px-4 py-2 rounded-lg text-sm font-medium">core_entity — User, Order</span>
+          <span class="bg-teal text-white px-4 py-2 rounded-lg text-sm font-medium">rich_join — OrderItem</span>
+          <span class="bg-softgray text-white px-4 py-2 rounded-lg text-sm font-medium">supporting — AuditLog</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Safety -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20 bg-warmgray/30">
+    <div class="max-w-6xl mx-auto w-full">
+      <p class="text-rust font-medium text-sm tracking-widest uppercase mb-4">Safety</p>
+      <h2 class="serif-display text-4xl md:text-5xl lg:text-6xl text-ink mb-14 max-w-3xl">
+        Read-only by design.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <div class="w-10 h-10 rounded-full bg-lightteal flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Read-only tools</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            Every MCP tool inspects structure. None write files or mutate the database.
+          </p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <div class="w-10 h-10 rounded-full bg-lightteal flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Secrets filtered</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            Credentials, .env files, master.key, and private config paths are excluded from generated context.
+          </p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <div class="w-10 h-10 rounded-full bg-lightteal flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Production-safe</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            HTTP MCP requires explicit opt-in and an auth token in production. stdio is local-only.
+          </p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-warmgray">
+          <div class="w-10 h-10 rounded-full bg-lightteal flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Opt-in extras</h4>
+          <p class="text-sm text-ink/70 leading-relaxed">
+            <code class="font-mono text-xs">database_stats</code> is opt-in because it queries PostgreSQL table statistics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Next Steps -->
+  <section class="section-desktop flex flex-col justify-center px-6 md:px-12 lg:px-20">
+    <div class="max-w-4xl mx-auto w-full text-center">
+      <p class="text-rust font-medium text-sm tracking-widest uppercase mb-4">Next steps</p>
+      <h2 class="serif-display text-4xl md:text-5xl lg:text-6xl text-ink mb-6">
+        Try it in five minutes.
+      </h2>
+      <p class="text-lg text-ink/70 mb-12 max-w-2xl mx-auto">
+        Add the gem, run the installer, generate your bridge files, and start the MCP server.
+      </p>
+
+      <div class="bg-ink rounded-2xl p-6 md:p-10 text-left max-w-2xl mx-auto mb-10">
+        <div class="space-y-4">
+          <div class="flex gap-4 items-start">
+            <span class="text-rust font-mono text-sm mt-1 shrink-0">$</span>
+            <code class="text-warmgray font-mono text-sm leading-relaxed">bundle add rails-ai-bridge</code>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="text-rust font-mono text-sm mt-1 shrink-0">$</span>
+            <code class="text-warmgray font-mono text-sm leading-relaxed">rails generate rails_ai_bridge:install</code>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="text-rust font-mono text-sm mt-1 shrink-0">$</span>
+            <code class="text-warmgray font-mono text-sm leading-relaxed">rails ai:bridge</code>
+          </div>
+          <div class="flex gap-4 items-start">
+            <span class="text-rust font-mono text-sm mt-1 shrink-0">$</span>
+            <code class="text-warmgray font-mono text-sm leading-relaxed">rails ai:serve</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <a href="https://github.com/igmarin/rails-ai-bridge" class="inline-block bg-rust text-white px-7 py-3 rounded-full text-sm font-medium hover:bg-rust/90 transition">View on GitHub</a>
+        <a href="https://rubygems.org/gems/rails-ai-bridge" class="inline-block bg-paper text-ink border border-warmgray px-7 py-3 rounded-full text-sm font-medium hover:bg-warmgray transition">RubyGems</a>
+      </div>
+
+      <p class="text-sm text-softgray">
+        Commit the generated files so your whole team benefits from the same AI context.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="px-6 md:px-12 lg:px-20 py-10 border-t border-warmgray">
+    <div class="max-w-6xl mx-auto">
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;">
+        <a href="/" style="color: #1C1917; text-decoration: none; font-weight: 600;">Home</a>
+        <a href="/ruby-skill-bench/" style="color: #9C948A; text-decoration: none;">ruby-skill-bench</a>
+        <a href="/rails-ai-bridge-site/" style="color: #9C948A; text-decoration: none;">rails-ai-bridge</a>
+        <a href="/rails-agent-skills-site/" style="color: #9C948A; text-decoration: none;">rails-agent-skills</a>
+        <a href="/#writing" style="color: #9C948A; text-decoration: none;">Writing</a>
+        <a href="/#connect" style="color: #9C948A; text-decoration: none;">Connect</a>
+      </div>
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-softgray">rails-ai-bridge — AI context for Ruby on Rails</p>
+        <p class="text-sm text-softgray">MIT License</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

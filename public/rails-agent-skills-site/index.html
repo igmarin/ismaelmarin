@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rails Agent Skills — Turn AI Assistants Into Disciplined Collaborators</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FAF6F0',
+            ink: '#1C1917',
+            rust: '#B85C38',
+            rustmuted: '#D4A88C',
+            teal: '#5B7B7A',
+            tealmuted: '#8BA8A7',
+            stone: '#E7E2DA',
+            stonesoft: '#F2EEE8',
+          },
+          fontFamily: {
+            body: ['"Bricolage Grotesque"', 'sans-serif'],
+            display: ['"Instrument Serif"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Bricolage Grotesque', sans-serif; background-color: #FAF6F0; color: #1C1917; }
+    .font-display { font-family: 'Instrument Serif', serif; }
+
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+    .animate-draw {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 2s ease-out forwards;
+    }
+    .animate-draw-delay {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 2s ease-out 0.5s forwards;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up {
+      opacity: 0;
+      animation: fade-up 0.8s ease-out forwards;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    .diagram-box {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .diagram-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(28,25,23,0.08);
+    }
+
+    .skill-pill {
+      transition: all 0.2s ease;
+    }
+    .skill-pill:hover {
+      background-color: #B85C38;
+      color: #FAF6F0;
+    }
+
+    code {
+      font-family: 'Bricolage Grotesque', monospace;
+      font-size: 0.85em;
+      background: #E7E2DA;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+
+    .gate-bar {
+      background: repeating-linear-gradient(
+        45deg,
+        #B85C38,
+        #B85C38 4px,
+        #D4A88C 4px,
+        #D4A88C 8px
+      );
+    }
+
+    /* Shared navigation */
+    .shared-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(250, 246, 240, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(231, 226, 218, 0.5);
+    }
+    .shared-nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      color: #1C1917;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+    .shared-nav-logo span { color: #B85C38; }
+    .shared-nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .shared-nav-links a {
+      color: #9C948A;
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .shared-nav-links a:hover { color: #B85C38; }
+    @media (max-width: 768px) { .shared-nav-links { display: none; } }
+  </style>
+</head>
+<body class="bg-paper text-ink antialiased" style="padding-top: 56px;">
+
+  <nav class="shared-nav">
+    <a href="/" class="shared-nav-logo">ismael<span>.marin</span></a>
+    <ul class="shared-nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/ruby-skill-bench/">ruby-skill-bench</a></li>
+      <li><a href="/rails-ai-bridge-site/">rails-ai-bridge</a></li>
+      <li><a href="/rails-agent-skills-site/">rails-agent-skills</a></li>
+      <li><a href="/#writing">Writing</a></li>
+      <li><a href="/#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 py-20 md:py-0">
+    <div class="max-w-5xl mx-auto w-full">
+      <p class="text-rust text-sm font-medium tracking-widest uppercase mb-6 animate-fade-up">Rails Agent Skills</p>
+      <h1 class="font-display text-5xl md:text-7xl leading-[1.1] mb-8 animate-fade-up delay-100">
+        AI assistants need<br>
+        <span class="italic text-rust">discipline</span>, not just knowledge
+      </h1>
+      <p class="text-lg md:text-xl text-ink/70 max-w-2xl leading-relaxed mb-12 animate-fade-up delay-200">
+        A curated library of <strong class="text-ink">41 executable skills</strong> and <strong class="text-ink">9 workflows</strong> that teach AI coding tools how to plan, test, implement, document, and review Rails work using production-minded conventions.
+      </p>
+      <div class="flex flex-wrap gap-4 animate-fade-up delay-300">
+        <div class="flex items-center gap-2 bg-stone px-4 py-2 rounded-full text-sm">
+          <span class="w-2 h-2 rounded-full bg-rust"></span>
+          Tests gate implementation
+        </div>
+        <div class="flex items-center gap-2 bg-stone px-4 py-2 rounded-full text-sm">
+          <span class="w-2 h-2 rounded-full bg-teal"></span>
+          41 atomic skills
+        </div>
+        <div class="flex items-center gap-2 bg-stone px-4 py-2 rounded-full text-sm">
+          <span class="w-2 h-2 rounded-full bg-ink/40"></span>
+          9 callable workflows
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="px-6 md:px-16 py-20 md:py-28 bg-stonesoft">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div>
+          <p class="text-rust text-sm font-medium tracking-widest uppercase mb-4">Why the old way fails</p>
+          <h2 class="font-display text-4xl md:text-5xl mb-6">Generic code dumps without guardrails</h2>
+          <p class="text-ink/70 leading-relaxed mb-6">
+            Most AI coding assistants produce <strong>plausible-looking code</strong> that lacks tests, skips review, and ignores your team's conventions. The result: inconsistent quality, missed edge cases, and code that looks right but breaks in production.
+          </p>
+          <ul class="space-y-3 text-ink/70">
+            <li class="flex items-start gap-3">
+              <span class="text-rust mt-0.5">&#10005;</span>
+              <span>Implementation written before tests exist</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rust mt-0.5">&#10005;</span>
+              <span>No checkpoint to confirm behavior boundaries</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rust mt-0.5">&#10005;</span>
+              <span>Self-review skipped or superficial</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rust mt-0.5">&#10005;</span>
+              <span>Different assistants produce different conventions</span>
+            </li>
+          </ul>
+        </div>
+        <div class="relative">
+          <svg viewBox="0 0 400 320" class="w-full h-auto">
+            <!-- Chat bubbles showing a naive request -->
+            <rect x="20" y="20" width="360" height="60" rx="12" fill="#E7E2DA" stroke="#D4A88C" stroke-width="1.5"/>
+            <text x="40" y="55" class="font-body" font-size="13" fill="#1C1917" text-anchor="start" dominant-baseline="middle">
+              "Add a status column to orders..."
+            </text>
+
+            <rect x="60" y="100" width="300" height="80" rx="12" fill="#FAF6F0" stroke="#B85C38" stroke-width="2"/>
+            <text x="80" y="130" class="font-body" font-size="12" fill="#1C1917" text-anchor="start">
+              <tspan x="80" dy="0">One migration:</tspan>
+              <tspan x="80" dy="18" font-family="monospace" font-size="11" fill="#B85C38">add_column :orders, :status</tspan>
+            </text>
+
+            <rect x="20" y="200" width="360" height="60" rx="12" fill="#E7E2DA" stroke="#D4A88C" stroke-width="1.5"/>
+            <text x="40" y="230" class="font-body" font-size="13" fill="#1C1917" text-anchor="start">
+              <tspan x="40" dy="0">Production locks table,</tspan>
+              <tspan x="40" dy="18" fill="#B85C38">downtime ensues</tspan>
+            </text>
+
+            <line x1="200" y1="80" x2="200" y2="100" stroke="#B85C38" stroke-width="2" stroke-dasharray="4 4"/>
+            <line x1="200" y1="180" x2="200" y2="200" stroke="#B85C38" stroke-width="2" stroke-dasharray="4 4"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE MENTAL MODEL -->
+  <section class="px-6 md:px-16 py-20 md:py-28">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-rust text-sm font-medium tracking-widest uppercase mb-4">The new mental model</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6 max-w-3xl">Skills are executable instructions, not documentation</h2>
+      <p class="text-lg text-ink/70 max-w-2xl leading-relaxed mb-16">
+        Each skill is a <code>SKILL.md</code> file containing task-specific instructions, conventions, and <strong>hard gates</strong> that an AI agent reads and follows. They are not tutorials to read once. They are constraints that run every time.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-stonesoft p-8 rounded-2xl diagram-box">
+          <div class="w-12 h-12 rounded-xl bg-rust/10 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl mb-3">Atomic</h3>
+          <p class="text-ink/70 leading-relaxed text-sm">
+            One skill per concern. <code>plan-tests</code> chooses the first failing spec. <code>write-tests</code> writes it. <code>code-review</code> reviews it. No monolithic guides.
+          </p>
+        </div>
+
+        <div class="bg-stonesoft p-8 rounded-2xl diagram-box">
+          <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B7B7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl mb-3">Gated</h3>
+          <p class="text-ink/70 leading-relaxed text-sm">
+            Hard gates enforce discipline. The <strong>Tests Gate</strong> means no implementation code can exist until the test exists, runs, and fails for the right reason.
+          </p>
+        </div>
+
+        <div class="bg-stonesoft p-8 rounded-2xl diagram-box">
+          <div class="w-12 h-12 rounded-xl bg-ink/5 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1917" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl mb-3">Chained</h3>
+          <p class="text-ink/70 leading-relaxed text-sm">
+            Each skill names the next skill to load in its Integration table. <code>write-tests</code> &rarr; implement &rarr; <code>write-yard-docs</code> &rarr; <code>code-review</code>. Skills are building blocks; workflows are the value.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS: TDD LOOP -->
+  <section class="px-6 md:px-16 py-20 md:py-28 bg-stonesoft">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-rust text-sm font-medium tracking-widest uppercase mb-4">How it works</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6">The TDD Feature Loop</h2>
+      <p class="text-lg text-ink/70 max-w-2xl leading-relaxed mb-16">
+        The most-used daily workflow. Every feature, bug fix, and refactor follows the same repeatable cycle. The agent cannot skip a checkpoint without your explicit approval.
+      </p>
+
+      <!-- Desktop diagram -->
+      <div class="hidden md:block">
+        <svg viewBox="0 0 900 420" class="w-full h-auto">
+          <!-- Context -->
+          <rect x="0" y="20" width="120" height="50" rx="8" fill="#FAF6F0" stroke="#5B7B7A" stroke-width="2"/>
+          <text x="60" y="48" class="font-body" font-size="12" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">load-context</text>
+
+          <!-- Arrow to plan-tests -->
+          <line x1="120" y1="45" x2="170" y2="45" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- plan-tests -->
+          <rect x="170" y="20" width="110" height="50" rx="8" fill="#FAF6F0" stroke="#5B7B7A" stroke-width="2"/>
+          <text x="225" y="48" class="font-body" font-size="12" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">plan-tests</text>
+
+          <!-- Arrow to write-tests -->
+          <line x1="280" y1="45" x2="330" y2="45" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- write-tests -->
+          <rect x="330" y="20" width="120" height="50" rx="8" fill="#FAF6F0" stroke="#5B7B7A" stroke-width="2"/>
+          <text x="390" y="48" class="font-body" font-size="12" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">write-tests</text>
+
+          <!-- Arrow to test feedback checkpoint -->
+          <line x1="450" y1="45" x2="500" y2="45" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Test Feedback Checkpoint (diamond) -->
+          <polygon points="555,20 605,45 555,70 505,45" fill="#D4A88C" stroke="#B85C38" stroke-width="2"/>
+          <text x="555" y="42" class="font-body" font-size="10" fill="#1C1917" text-anchor="middle">Test Feedback</text>
+          <text x="555" y="54" class="font-body" font-size="10" fill="#1C1917" text-anchor="middle">Checkpoint</text>
+
+          <!-- Arrow down to implementation proposal -->
+          <line x1="555" y1="70" x2="555" y2="120" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Implementation Proposal Checkpoint -->
+          <polygon points="610,120 660,145 610,170 560,145" fill="#8BA8A7" stroke="#5B7B7A" stroke-width="2"/>
+          <text x="610" y="142" class="font-body" font-size="10" fill="#FAF6F0" text-anchor="middle">Implementation</text>
+          <text x="610" y="154" class="font-body" font-size="10" fill="#FAF6F0" text-anchor="middle">Proposal</text>
+
+          <!-- Arrow to implement -->
+          <line x1="610" y1="170" x2="610" y2="220" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Implement -->
+          <rect x="550" y="220" width="120" height="50" rx="8" fill="#FAF6F0" stroke="#1C1917" stroke-width="2"/>
+          <text x="610" y="248" class="font-body" font-size="12" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">Implement</text>
+
+          <!-- Arrow to green -->
+          <line x1="610" y1="270" x2="610" y2="310" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Green pass -->
+          <rect x="550" y="310" width="120" height="40" rx="8" fill="#5B7B7A" stroke="#5B7B7A" stroke-width="2"/>
+          <text x="610" y="335" class="font-body" font-size="12" fill="#FAF6F0" text-anchor="middle" dominant-baseline="middle">Test passes</text>
+
+          <!-- Arrow right to refactor -->
+          <line x1="670" y1="330" x2="720" y2="330" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Refactor -->
+          <rect x="720" y="310" width="120" height="40" rx="8" fill="#FAF6F0" stroke="#1C1917" stroke-width="2"/>
+          <text x="780" y="335" class="font-body" font-size="12" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">Refactor</text>
+
+          <!-- Loop back arrow -->
+          <path d="M 780 310 Q 780 260 700 260 Q 200 260 200 310" fill="none" stroke="#1C1917" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+          <text x="400" y="250" class="font-body" font-size="10" fill="#1C1917" text-anchor="middle">More behaviors?</text>
+
+          <!-- Bottom gate -->
+          <rect x="0" y="380" width="200" height="40" rx="8" class="gate-bar" stroke="#B85C38" stroke-width="2"/>
+          <text x="100" y="405" class="font-body" font-size="11" fill="#FAF6F0" text-anchor="middle" dominant-baseline="middle" font-weight="600">GATE: Linters + Suite</text>
+
+          <line x1="200" y1="400" x2="280" y2="400" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <rect x="280" y="380" width="140" height="40" rx="8" fill="#FAF6F0" stroke="#1C1917" stroke-width="2"/>
+          <text x="350" y="405" class="font-body" font-size="11" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">write-yard-docs</text>
+
+          <line x1="420" y1="400" x2="500" y2="400" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <rect x="500" y="380" width="120" height="40" rx="8" fill="#FAF6F0" stroke="#1C1917" stroke-width="2"/>
+          <text x="560" y="405" class="font-body" font-size="11" fill="#1C1917" text-anchor="middle" dominant-baseline="middle">code-review</text>
+
+          <line x1="620" y1="400" x2="700" y2="400" stroke="#1C1917" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <rect x="700" y="380" width="100" height="40" rx="8" fill="#B85C38" stroke="#B85C38" stroke-width="2"/>
+          <text x="750" y="405" class="font-body" font-size="11" fill="#FAF6F0" text-anchor="middle" dominant-baseline="middle" font-weight="600">Open PR</text>
+
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#1C1917"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Mobile diagram -->
+      <div class="md:hidden space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center text-teal font-bold text-sm">1</div>
+          <div class="flex-1 bg-paper p-4 rounded-xl border-2 border-teal">
+            <p class="font-medium text-sm">load-context</p>
+            <p class="text-xs text-ink/60">Sync schema, routes, patterns</p>
+          </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-4 bg-ink/20"></div></div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center text-teal font-bold text-sm">2</div>
+          <div class="flex-1 bg-paper p-4 rounded-xl border-2 border-teal">
+            <p class="font-medium text-sm">plan-tests + write-tests</p>
+            <p class="text-xs text-ink/60">Choose and write the first failing spec</p>
+          </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-4 bg-rust"></div></div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-rust/10 flex items-center justify-center text-rust font-bold text-sm">&#9632;</div>
+          <div class="flex-1 bg-rust/10 p-4 rounded-xl border-2 border-rust">
+            <p class="font-medium text-sm text-rust">Checkpoint: Test Feedback</p>
+            <p class="text-xs text-ink/60">You approve the test before any code is written</p>
+          </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-4 bg-rust"></div></div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-rust/10 flex items-center justify-center text-rust font-bold text-sm">&#9632;</div>
+          <div class="flex-1 bg-rust/10 p-4 rounded-xl border-2 border-rust">
+            <p class="font-medium text-sm text-rust">Checkpoint: Implementation Proposal</p>
+            <p class="text-xs text-ink/60">You approve the approach before implementation</p>
+          </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-4 bg-ink/20"></div></div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center text-teal font-bold text-sm">3</div>
+          <div class="flex-1 bg-paper p-4 rounded-xl border-2 border-teal">
+            <p class="font-medium text-sm">Implement &rarr; Test passes &rarr; Refactor</p>
+            <p class="text-xs text-ink/60">Minimal code, green test, clean up</p>
+          </div>
+        </div>
+        <div class="flex justify-center"><div class="w-0.5 h-4 bg-ink/20"></div></div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-ink/5 flex items-center justify-center text-ink font-bold text-sm">4</div>
+          <div class="flex-1 bg-paper p-4 rounded-xl border-2 border-ink/20">
+            <p class="font-medium text-sm">Docs &rarr; Review &rarr; PR</p>
+            <p class="text-xs text-ink/60">YARD, self-review, merge</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LIBRARY -->
+  <section class="px-6 md:px-16 py-20 md:py-28">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-rust text-sm font-medium tracking-widest uppercase mb-4">The library</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6">41 skills, 9 workflows, 10 categories</h2>
+      <p class="text-lg text-ink/70 max-w-2xl leading-relaxed mb-12">
+        Each skill has a <code>SKILL.md</code> entry point. Some have companion files for examples, test templates, patterns, or heuristics. Workflows chain skills into full development loops.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-stonesoft p-6 rounded-2xl">
+          <h3 class="font-display text-xl mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rust"></span>
+            Planning
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">create-prd</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">generate-tasks</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">plan-tickets</span>
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-6 rounded-2xl">
+          <h3 class="font-display text-xl mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rust"></span>
+            Testing
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">plan-tests</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">write-tests</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">test-service</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">triage-bug</span>
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-6 rounded-2xl">
+          <h3 class="font-display text-xl mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-teal"></span>
+            Code Quality
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">code-review</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">security-check</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">refactor-code</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">apply-code-conventions</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">apply-stack-conventions</span>
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-6 rounded-2xl">
+          <h3 class="font-display text-xl mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-teal"></span>
+            Architecture &amp; DDD
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">define-domain-language</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">review-domain-boundaries</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">model-domain</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">review-architecture</span>
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-6 rounded-2xl">
+          <h3 class="font-display text-xl mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-ink/40"></span>
+            Rails Implementation
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">create-service-object</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">implement-background-job</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">implement-authorization</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">implement-hotwire</span>
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-6 rounded-2xl">
+          <h3 class="font-display text-xl mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-ink/40"></span>
+            APIs &amp; Engines
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">implement-graphql</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">integrate-api-client</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">version-api</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">create-engine</span>
+            <span class="skill-pill bg-paper px-3 py-1 rounded-full text-xs cursor-default">test-engine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-ink text-paper p-8 rounded-2xl">
+        <h3 class="font-display text-2xl mb-4">Workflows chain skills into full cycles</h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">tdd</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">quality</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">review</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">engine</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">bug-fix</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">graphql</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">migration</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">background-job</div>
+          <div class="bg-paper/10 px-3 py-2 rounded-lg text-center">setup</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCRETE EXAMPLE -->
+  <section class="px-6 md:px-16 py-20 md:py-28 bg-stonesoft">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-rust text-sm font-medium tracking-widest uppercase mb-4">Concrete example</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6">A safe migration request</h2>
+      <p class="text-lg text-ink/70 max-w-2xl leading-relaxed mb-12">
+        See the difference between a naive request and a skill-guided request. The skill enforces a multi-step process that protects your production database.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Naive -->
+        <div class="bg-paper p-6 rounded-2xl border-2 border-rust/20">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-6 h-6 rounded-full bg-rust/10 flex items-center justify-center text-rust text-xs font-bold">!</span>
+            <h3 class="font-display text-xl">Naive request</h3>
+          </div>
+          <div class="bg-stone p-4 rounded-xl mb-4">
+            <p class="text-sm text-ink/70 italic">"Add a status column to orders with default 'pending' and not null."</p>
+          </div>
+          <p class="text-sm text-ink/70 mb-3">AI generates:</p>
+          <div class="bg-ink text-paper p-4 rounded-xl font-mono text-xs leading-relaxed mb-4">
+            add_column :orders, :status,<br>
+            &nbsp;&nbsp;:string, default: "pending",<br>
+            &nbsp;&nbsp;null: false
+          </div>
+          <div class="flex items-center gap-2 text-rust text-sm">
+            <span class="text-lg">&#9888;</span>
+            <span>Production table lock. Downtime.</span>
+          </div>
+        </div>
+
+        <!-- Skill-guided -->
+        <div class="bg-paper p-6 rounded-2xl border-2 border-teal/30">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center text-teal text-xs font-bold">&#10003;</span>
+            <h3 class="font-display text-xl">Skill-guided request</h3>
+          </div>
+          <div class="bg-stone p-4 rounded-xl mb-4">
+            <p class="text-sm text-ink/70 italic">"Add a status column to orders. Follow <code>review-migration</code>."</p>
+          </div>
+          <p class="text-sm text-ink/70 mb-3">AI generates:</p>
+          <div class="space-y-2">
+            <div class="bg-ink text-paper p-3 rounded-xl font-mono text-xs">
+              <span class="text-tealmuted"># Step 1</span><br>
+              add_column :orders, :status, :string
+            </div>
+            <div class="bg-ink text-paper p-3 rounded-xl font-mono text-xs">
+              <span class="text-tealmuted"># Step 2: Backfill in background job</span><br>
+              Order.where(status: nil).update_all(status: "pending")
+            </div>
+            <div class="bg-ink text-paper p-3 rounded-xl font-mono text-xs">
+              <span class="text-tealmuted"># Step 3: Add constraint</span><br>
+              change_column_null :orders, :status, false
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-teal text-sm mt-4">
+            <span class="text-lg">&#10003;</span>
+            <span>No table lock. Safe deployment.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATION -->
+  <section class="px-6 md:px-16 py-20 md:py-28">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-rust text-sm font-medium tracking-widest uppercase mb-4">Integration</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6">Three ways to invoke</h2>
+      <p class="text-lg text-ink/70 max-w-2xl leading-relaxed mb-12">
+        Use MCP for autonomous tool calls, chat commands for explicit control, or the CLI for manual installation and evaluation.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-stonesoft p-8 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-rust/10 flex items-center justify-center mb-5 text-rust font-bold">1</div>
+          <h3 class="font-display text-xl mb-3">MCP Server</h3>
+          <p class="text-ink/70 text-sm leading-relaxed mb-4">
+            The recommended path. The agent discovers skills through <code>list_skills</code> and loads them on demand via <code>use_skill</code>. Context stays small.
+          </p>
+          <div class="bg-paper p-3 rounded-lg font-mono text-xs text-ink/60">
+            docker run --rm -i<br>
+            igmarin/rails-agent-skills-mcp:5.1.5
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-8 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-5 text-teal font-bold">2</div>
+          <h3 class="font-display text-xl mb-3">Chat Commands</h3>
+          <p class="text-ink/70 text-sm leading-relaxed mb-4">
+            Force the agent to use a specific skill. In Cursor or Windsurf, prepend with <code>@</code>. In Claude Code, describe the goal and the agent loads the right skill.
+          </p>
+          <div class="bg-paper p-3 rounded-lg font-mono text-xs text-ink/60">
+            "Follow the TDD workflow<br>
+            for this task"
+          </div>
+        </div>
+
+        <div class="bg-stonesoft p-8 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-ink/5 flex items-center justify-center mb-5 text-ink font-bold">3</div>
+          <h3 class="font-display text-xl mb-3">GitHub CLI</h3>
+          <p class="text-ink/70 text-sm leading-relaxed mb-4">
+            Install specific skills into your agent host. Pin to release tags for reproducible installs. Works with Claude, Cursor, Windsurf, and Codex.
+          </p>
+          <div class="bg-paper p-3 rounded-lg font-mono text-xs text-ink/60">
+            gh skill install<br>
+            igmarin/rails-agent-skills<br>
+            plan-tests --scope user
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT STEP -->
+  <section class="px-6 md:px-16 py-20 md:py-28 bg-ink text-paper">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-rustmuted text-sm font-medium tracking-widest uppercase mb-4">What to do next</p>
+      <h2 class="font-display text-4xl md:text-6xl mb-8">Start with the TDD loop</h2>
+      <p class="text-lg text-paper/70 max-w-2xl mx-auto leading-relaxed mb-12">
+        The fastest way to experience the difference: pick a small feature, run <code>load-context</code>, then <code>plan-tests</code>. Watch the agent stop at checkpoints, confirm boundaries with you, and only then write code.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://github.com/igmarin/rails-agent-skills" class="inline-flex items-center gap-2 bg-rust text-paper px-6 py-3 rounded-xl font-medium hover:bg-rustmuted transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          View on GitHub
+        </a>
+        <a href="https://hub.docker.com/r/igmarin/rails-agent-skills-mcp" class="inline-flex items-center gap-2 bg-paper/10 text-paper px-6 py-3 rounded-xl font-medium hover:bg-paper/20 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+            <line x1="6" y1="6" x2="6.01" y2="6"/>
+            <line x1="6" y1="18" x2="6.01" y2="18"/>
+          </svg>
+          Docker Image
+        </a>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-paper/10 flex flex-wrap justify-center gap-6 text-paper/40 text-sm">
+        <span>MCP Registry</span>
+        <span>&middot;</span>
+        <span>skills.sh</span>
+        <span>&middot;</span>
+        <span>Smithery</span>
+        <span>&middot;</span>
+        <span>Glama</span>
+        <span>&middot;</span>
+        <span>Tessl</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="px-6 md:px-16 py-8 bg-ink text-paper/30 text-sm text-center">
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: #FAF6F0;">
+      <a href="/" style="color: #FAF6F0; text-decoration: none; font-weight: 600;">Home</a>
+      <a href="/ruby-skill-bench/" style="color: rgba(250,246,240,0.5); text-decoration: none;">ruby-skill-bench</a>
+      <a href="/rails-ai-bridge-site/" style="color: rgba(250,246,240,0.5); text-decoration: none;">rails-ai-bridge</a>
+      <a href="/rails-agent-skills-site/" style="color: rgba(250,246,240,0.5); text-decoration: none;">rails-agent-skills</a>
+      <a href="/#writing" style="color: rgba(250,246,240,0.5); text-decoration: none;">Writing</a>
+      <a href="/#connect" style="color: rgba(250,246,240,0.5); text-decoration: none;">Connect</a>
+    </div>
+    <p>Rails Agent Skills &mdash; MIT License &mdash; Built for production-minded Rails teams</p>
+  </footer>
+
+</body>
+</html>

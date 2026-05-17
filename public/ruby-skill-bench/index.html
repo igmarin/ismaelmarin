@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruby Skill Bench — Explained</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* ── Shared Nav overrides for this page ── */
+    .shared-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(6, 11, 19, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .shared-nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+    .shared-nav-logo span { color: #06b6d4; }
+    .shared-nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .shared-nav-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .shared-nav-links a:hover { color: #06b6d4; }
+    @media (max-width: 768px) { .shared-nav-links { display: none; } }
+
+    /* ── Tailwind-style utility classes (dark theme) ── */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-wrap { flex-wrap: wrap; }
+    .flex-shrink-0 { flex-shrink: 0; }
+    .grid { display: grid; }
+    .block { display: block; }
+    .hidden { display: none; }
+    .items-start { align-items: flex-start; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-5 { gap: 1.25rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mx-6 { margin-left: 1.5rem; margin-right: 1.5rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-5 { margin-bottom: 1.25rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-10 { margin-bottom: 2.5rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mb-14 { margin-bottom: 3.5rem; }
+    .mb-16 { margin-bottom: 4rem; }
+    .mt-0 { margin-top: 0; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-3 { margin-top: 0.75rem; }
+    .mt-10 { margin-top: 2.5rem; }
+    .mt-14 { margin-top: 3.5rem; }
+    .ml-auto { margin-left: auto; }
+    .mr-auto { margin-right: auto; }
+    .p-4 { padding: 1rem; }
+    .p-5 { padding: 1.25rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+    .py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .pl-6 { padding-left: 1.5rem; }
+    .pr-4 { padding-right: 1rem; }
+    .pr-6 { padding-right: 1.5rem; }
+    .pt-1 { padding-top: 0.25rem; }
+    .pb-8 { padding-bottom: 2rem; }
+    .w-fit { width: fit-content; }
+    .w-full { width: 100%; }
+    .w-px { width: 1px; }
+    .w-10 { width: 2.5rem; }
+    .h-10 { height: 2.5rem; }
+    .h-px { height: 1px; }
+    .min-h-screen { min-height: 100vh; }
+    .max-w-2xl { max-width: 42rem; }
+    .max-w-4xl { max-width: 56rem; }
+    .max-w-5xl { max-width: 64rem; }
+    .max-w-sm { max-width: 24rem; }
+    .overflow-x-auto { overflow-x: auto; }
+    .rounded { border-radius: 0.25rem; }
+    .rounded-full { border-radius: 9999px; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-2xl { border-radius: 1rem; }
+    .rounded-4 { border-radius: 0.25rem; }
+    .border { border-width: 1px; border-style: solid; }
+    .border-2 { border-width: 2px; border-style: solid; }
+    .border-t { border-top-width: 1px; border-top-style: solid; }
+    .border-b { border-bottom-width: 1px; border-bottom-style: solid; }
+    .border-b-2 { border-bottom-width: 2px; border-bottom-style: solid; }
+    .border-l-4 { border-left-width: 4px; border-left-style: solid; }
+    .border-dashed { border-style: dashed; }
+    .border-collapse { border-collapse: collapse; }
+    .divide-y > * + * { border-top-width: 1px; border-top-style: solid; }
+    .list-none { list-style: none; }
+    .italic { font-style: italic; }
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-right { text-align: right; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-medium { font-weight: 500; }
+    .font-normal { font-weight: 400; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-widest { letter-spacing: 0.15em; }
+    .tracking-wide { letter-spacing: 0.05em; }
+    .leading-tight { line-height: 1.25; }
+    .leading-snug { line-height: 1.375; }
+    .leading-relaxed { line-height: 1.625; }
+    .space-y-1 > * + * { margin-top: 0.25rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-4xl { font-size: 2.25rem; }
+    .text-5xl { font-size: 3rem; }
+    .z-10 { z-index: 10; }
+
+    /* Colors (dark theme) */
+    .text-rust { color: #b5451b; }
+    .text-teal { color: #2a6b6e; }
+    .text-muted { color: #94a3b8; }
+    .text-ink { color: #ffffff; }
+    .text-paper { color: #ffffff; }
+    .text-white { color: #ffffff; }
+    .text-cyan { color: #06b6d4; }
+    .text-gray-light { color: #cbd5e1; }
+    .border-rust { border-color: #b5451b; }
+    .border-teal { border-color: #2a6b6e; }
+    .border-border { border-color: rgba(255,255,255,0.08); }
+    .border-ink { border-color: #ffffff; }
+    .divide-border > * + * { border-color: rgba(255,255,255,0.08); }
+    .divide-border\/50 > * + * { border-color: rgba(255,255,255,0.05); }
+    .bg-rust { background-color: #b5451b; }
+    .bg-teal { background-color: #2a6b6e; }
+    .bg-warm { background-color: rgba(255,255,255,0.06); }
+    .bg-white { background-color: rgba(20,28,40,0.4); }
+    .bg-ink { background-color: #0f172a; }
+    .bg-border\/60 { background-color: rgba(255,255,255,0.05); }
+
+    /* Font families */
+    .font-display { font-family: 'DM Serif Display', serif; }
+    .font-mono { font-family: 'DM Mono', monospace; }
+    .font-sans { font-family: 'DM Mono', monospace; }
+
+    /* Card glassmorphism */
+    .glass-card {
+      background: rgba(20, 28, 40, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .glass-card:hover {
+      background: rgba(30, 40, 60, 0.6);
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(6, 182, 212, 0.15);
+    }
+
+    /* Specific dark overrides */
+    .section-divider { border-color: rgba(255,255,255,0.08); }
+
+    /* Pipeline SVG */
+    .pipe-box { fill: #141c28; stroke: rgba(255,255,255,0.08); stroke-width: 1.5; rx: 8; }
+    .pipe-box-rust { fill: rgba(181, 69, 27, 0.12); stroke: #b5451b; stroke-width: 1.5; }
+    .pipe-box-teal { fill: rgba(42, 107, 110, 0.12); stroke: #2a6b6e; stroke-width: 1.5; }
+    .pipe-arrow { fill: none; stroke: #94a3b8; stroke-width: 1.5; marker-end: url(#arrow); }
+
+    /* Score table */
+    .score-row td { padding: 6px 12px; }
+    .delta-pos { color: #2a6b6e; font-weight: 600; }
+    .delta-neg { color: #b5451b; font-weight: 600; }
+
+    /* Verdict badge */
+    .badge-pass { background: rgba(42, 107, 110, 0.15); color: #2a6b6e; border: 1.5px solid #2a6b6e; }
+    .badge-fail { background: rgba(181, 69, 27, 0.15); color: #b5451b; border: 1.5px solid #b5451b; }
+
+    /* Dim cards */
+    .dim-card {
+      background: rgba(20, 28, 40, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .dim-card:hover {
+      background: rgba(30, 40, 60, 0.6);
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(6, 182, 212, 0.15);
+    }
+
+    /* Code blocks */
+    pre {
+      background: #0d1117;
+      color: #e8e0d5;
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      font-family: 'DM Mono', monospace;
+    }
+    code { font-family: 'DM Mono', monospace; }
+
+    /* Nav dot */
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); display: inline-block; }
+    .nav-dot.active { background: #b5451b; }
+
+    /* Transition helpers */
+    .transition-colors { transition: color 0.2s, background-color 0.2s; }
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      .sm\:flex-row { flex-direction: row; }
+      .sm\:items-center { align-items: center; }
+      .sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 768px) {
+      .md\:flex-row { flex-direction: row; }
+      .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .md\:grid-cols-\[48px_1fr_1fr\] { grid-template-columns: 48px 1fr 1fr; }
+      .md\:px-16 { padding-left: 4rem; padding-right: 4rem; }
+      .md\:p-10 { padding: 2.5rem; }
+      .md\:p-8 { padding: 2rem; }
+      .md\:text-7xl { font-size: 4.5rem; }
+      .md\:text-5xl { font-size: 3rem; }
+      .md\:text-2xl { font-size: 1.5rem; }
+      .md\:block { display: block; }
+      .md\:hidden { display: none; }
+    }
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Footer override for dark theme */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    footer a {
+      color: #06b6d4;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: #8b5cf6; }
+  </style>
+</head>
+<body class="min-h-screen" style="padding-top: 56px; background-color: #060b13; color: #ffffff; font-family: 'DM Mono', monospace;">
+
+  <nav class="shared-nav">
+    <a href="/" class="shared-nav-logo">ismael<span>.marin</span></a>
+    <ul class="shared-nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/ruby-skill-bench/">ruby-skill-bench</a></li>
+      <li><a href="/rails-ai-bridge-site/">rails-ai-bridge</a></li>
+      <li><a href="/rails-agent-skills-site/">rails-agent-skills</a></li>
+      <li><a href="/#writing">Writing</a></li>
+      <li><a href="/#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 1 — HERO
+  ═══════════════════════════════════════════════════ -->
+  <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 py-20 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-6">Ruby Skill Bench</p>
+    <h1 class="font-display text-5xl md:text-7xl leading-tight mb-8 text-white">
+      Does your AI skill<br/>
+      <em>actually</em> help?
+    </h1>
+    <p class="text-muted text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+      You write a <code class="bg-warm px-1.5 py-0.5 rounded text-sm text-white">SKILL.md</code> — a Markdown guide for an AI agent. But you have no way to prove it makes the agent write better code. <strong class="text-white">Ruby Skill Bench</strong> measures exactly that.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 mb-16">
+      <div class="bg-teal text-white px-5 py-3 rounded-lg text-sm font-semibold inline-block w-fit">
+        gem install ruby-skill-bench
+      </div>
+      <div class="border border-border text-muted px-5 py-3 rounded-lg text-sm inline-block w-fit">
+        skill-bench init --openai
+      </div>
+    </div>
+    <!-- Big concept: the one-liner -->
+    <div class="border-l-4 border-rust pl-6 py-2">
+      <p class="text-white text-xl md:text-2xl font-medium leading-snug">
+        Run the agent twice — once without your skill, once with it — then let an LLM judge score both outputs. The difference is your skill's ROI.
+      </p>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 2 — THE PROBLEM
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">The Problem</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-10 text-white">Skills are written blind</h2>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      <!-- Before -->
+      <div class="glass-card p-6">
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-4">Without a bench</p>
+        <ul class="space-y-3 text-sm text-white leading-relaxed list-none">
+          <li class="flex gap-3"><span class="text-rust mt-0.5">✗</span> You write a SKILL.md and hope the agent reads it</li>
+          <li class="flex gap-3"><span class="text-rust mt-0.5">✗</span> You read the output manually — inconsistent, slow</li>
+          <li class="flex gap-3"><span class="text-rust mt-0.5">✗</span> You can't tell if a skill edit helped or hurt</li>
+          <li class="flex gap-3"><span class="text-rust mt-0.5">✗</span> A longer skill might confuse the agent more</li>
+          <li class="flex gap-3"><span class="text-rust mt-0.5">✗</span> No baseline to compare against</li>
+        </ul>
+      </div>
+      <!-- After -->
+      <div class="glass-card p-6" style="border-color: rgba(42,107,110,0.4);">
+        <p class="text-xs font-semibold text-teal uppercase tracking-widest mb-4">With Ruby Skill Bench</p>
+        <ul class="space-y-3 text-sm text-white leading-relaxed list-none">
+          <li class="flex gap-3"><span class="text-teal mt-0.5">✓</span> Every run scores both baseline and context outputs</li>
+          <li class="flex gap-3"><span class="text-teal mt-0.5">✓</span> An LLM judge scores across 5 named dimensions</li>
+          <li class="flex gap-3"><span class="text-teal mt-0.5">✓</span> Delta shows exactly where your skill helped</li>
+          <li class="flex gap-3"><span class="text-teal mt-0.5">✓</span> History file tracks trends run-over-run</li>
+          <li class="flex gap-3"><span class="text-teal mt-0.5">✓</span> Pass/fail verdict is reproducible and auditable</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- The key insight callout -->
+    <div class="bg-ink text-white rounded-2xl p-8 md:p-10">
+      <p class="text-rust text-xs font-semibold tracking-widest uppercase mb-3">Key insight</p>
+      <p class="text-xl md:text-2xl font-medium leading-snug mb-4">
+        A skill that reads well to humans can still hurt the agent.
+      </p>
+      <p class="text-gray-light text-sm leading-relaxed">
+        If baseline = 89 and context = 87, your skill confused the agent or added noise. Ruby Skill Bench catches this before you ship the skill. The most common "unexpected FAIL" is a skill that's too long, contradictory, or full of boilerplate the judge penalizes.
+      </p>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 3 — MENTAL MODEL (PIPELINE DIAGRAM)
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">The Mental Model</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-4 text-white">One task, two runs, one judge</h2>
+    <p class="text-muted text-lg mb-12 max-w-2xl">The engine runs every eval twice in isolated Git sandboxes, then scores both outputs independently. The judge never sees both at the same time — no halo-effect bias.</p>
+
+    <!-- Pipeline SVG — desktop -->
+    <div class="hidden md:block w-full overflow-x-auto mb-10">
+      <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-4xl mx-auto" style="height:340px">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8" />
+          </marker>
+        </defs>
+
+        <!-- task.md box -->
+        <rect x="20" y="130" width="110" height="80" rx="8" fill="#141c28" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+        <text x="75" y="162" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#ffffff" font-weight="600">task.md</text>
+        <text x="75" y="182" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8">agent prompt</text>
+        <text x="75" y="197" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8">(shared)</text>
+
+        <!-- Arrow task → agent A -->
+        <line x1="130" y1="150" x2="195" y2="105" class="pipe-arrow" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- Arrow task → agent B -->
+        <line x1="130" y1="200" x2="195" y2="245" class="pipe-arrow" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- SKILL.md box -->
+        <rect x="20" y="240" width="110" height="50" rx="8" fill="rgba(181,69,27,0.12)" stroke="#b5451b" stroke-width="1.5"/>
+        <text x="75" y="262" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#b5451b" font-weight="600">SKILL.md</text>
+        <text x="75" y="278" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#b5451b">skill context</text>
+        <!-- Arrow skill → agent B -->
+        <line x1="130" y1="265" x2="195" y2="265" class="pipe-arrow" stroke="#b5451b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Agent A — Baseline -->
+        <rect x="200" y="70" width="130" height="70" rx="8" fill="#141c28" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+        <text x="265" y="97" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#ffffff" font-weight="600">Agent A</text>
+        <text x="265" y="113" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8">no skill</text>
+        <text x="265" y="127" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8">ReAct loop</text>
+
+        <!-- Agent B — Context -->
+        <rect x="200" y="230" width="130" height="70" rx="8" fill="rgba(181,69,27,0.12)" stroke="#b5451b" stroke-width="1.5"/>
+        <text x="265" y="257" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#b5451b" font-weight="600">Agent B</text>
+        <text x="265" y="273" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#b5451b">+ skill context</text>
+        <text x="265" y="287" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#b5451b">ReAct loop</text>
+
+        <!-- Arrow A → output A -->
+        <line x1="330" y1="105" x2="395" y2="105" class="pipe-arrow" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- Arrow B → output B -->
+        <line x1="330" y1="265" x2="395" y2="265" class="pipe-arrow" stroke="#b5451b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Output A -->
+        <rect x="400" y="70" width="100" height="70" rx="8" fill="#141c28" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+        <text x="450" y="97" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#ffffff" font-weight="600">Output A</text>
+        <text x="450" y="113" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8">git diff</text>
+        <text x="450" y="127" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8">baseline</text>
+
+        <!-- Output B -->
+        <rect x="400" y="230" width="100" height="70" rx="8" fill="rgba(181,69,27,0.12)" stroke="#b5451b" stroke-width="1.5"/>
+        <text x="450" y="257" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#b5451b" font-weight="600">Output B</text>
+        <text x="450" y="273" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#b5451b">git diff</text>
+        <text x="450" y="287" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#b5451b">context</text>
+
+        <!-- Arrow out A → judge A -->
+        <line x1="500" y1="105" x2="565" y2="105" class="pipe-arrow" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- Arrow out B → judge B -->
+        <line x1="500" y1="265" x2="565" y2="265" class="pipe-arrow" stroke="#b5451b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Judge A -->
+        <rect x="570" y="70" width="110" height="70" rx="8" fill="rgba(42,107,110,0.12)" stroke="#2a6b6e" stroke-width="1.5"/>
+        <text x="625" y="96" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#2a6b6e" font-weight="600">Judge</text>
+        <text x="625" y="112" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#2a6b6e">blind scoring</text>
+        <text x="625" y="128" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#2a6b6e">Score A</text>
+
+        <!-- Judge B -->
+        <rect x="570" y="230" width="110" height="70" rx="8" fill="rgba(42,107,110,0.12)" stroke="#2a6b6e" stroke-width="1.5"/>
+        <text x="625" y="256" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#2a6b6e" font-weight="600">Judge</text>
+        <text x="625" y="272" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#2a6b6e">blind scoring</text>
+        <text x="625" y="288" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#2a6b6e">Score B</text>
+
+        <!-- Arrows judge A,B → delta -->
+        <line x1="680" y1="105" x2="735" y2="175" class="pipe-arrow" stroke="#2a6b6e" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="680" y1="265" x2="735" y2="195" class="pipe-arrow" stroke="#2a6b6e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- Delta Report -->
+        <rect x="740" y="150" width="110" height="70" rx="8" fill="rgba(42,107,110,0.12)" stroke="#2a6b6e" stroke-width="2"/>
+        <text x="795" y="176" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="DM Mono,monospace" fill="#2a6b6e" font-weight="700">Delta</text>
+        <text x="795" y="192" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#2a6b6e">B − A</text>
+        <text x="795" y="208" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="DM Mono,monospace" fill="#2a6b6e">PASS / FAIL</text>
+
+        <!-- Label: "isolated Git sandbox" -->
+        <text x="265" y="30" text-anchor="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8" font-style="italic">isolated Git sandbox</text>
+        <rect x="195" y="40" width="200" height="10" rx="2" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="265" y="330" text-anchor="middle" font-size="10" font-family="DM Mono,monospace" fill="#94a3b8" font-style="italic">isolated Git sandbox</text>
+        <rect x="195" y="315" width="200" height="10" rx="2" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4,3"/>
+      </svg>
+    </div>
+
+    <!-- Mobile pipeline — stacked cards -->
+    <div class="md:hidden space-y-3 mb-10">
+      <div class="glass-card p-4">
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-1">Step 1 — Baseline run</p>
+        <p class="text-sm text-white">Agent receives <code class="bg-border/60 px-1 rounded">task.md</code> only. No skill. Produces Output A from an isolated Git sandbox.</p>
+      </div>
+      <div class="glass-card p-4" style="border-color: rgba(181,69,27,0.3);">
+        <p class="text-xs font-semibold text-rust uppercase tracking-widest mb-1">Step 2 — Context run</p>
+        <p class="text-sm text-white">Agent receives <code class="bg-border/60 px-1 rounded">task.md</code> + <code class="bg-border/60 px-1 rounded">SKILL.md</code>. Produces Output B from a fresh sandbox.</p>
+      </div>
+      <div class="glass-card p-4" style="border-color: rgba(42,107,110,0.3);">
+        <p class="text-xs font-semibold text-teal uppercase tracking-widest mb-1">Step 3 — Blind judging</p>
+        <p class="text-sm text-white">LLM judge scores Output A and Output B in two separate calls. Never sees both at once.</p>
+      </div>
+      <div class="glass-card p-4" style="border-color: rgba(42,107,110,0.4);">
+        <p class="text-xs font-semibold text-teal uppercase tracking-widest mb-1">Step 4 — Delta + verdict</p>
+        <p class="text-sm text-white">Delta = Score B − Score A. Pass if context ≥ threshold AND delta ≥ minimum.</p>
+      </div>
+    </div>
+
+    <!-- Sandbox callout -->
+    <div class="dim-card p-5 flex gap-4 items-start">
+      <div class="text-2xl leading-none mt-0.5">📦</div>
+      <div>
+        <p class="font-semibold text-white text-sm mb-1">Isolated Git sandboxes</p>
+        <p class="text-muted text-sm">Every run uses <code class="bg-border/60 px-1 rounded text-xs">Dir.mktmpdir</code> to create a clean temporary repo. State changes are captured as a <code class="bg-border/60 px-1 rounded text-xs">git diff</code>. The host filesystem is never touched. Sandboxes are deleted after each run.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 4 — HOW IT WORKS (4-STEP FLOW)
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">How It Works</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-12 text-white">Four commands, one result</h2>
+
+    <div class="space-y-8">
+
+      <!-- Step 1 -->
+      <div class="grid md:grid-cols-[48px_1fr_1fr] gap-6 items-start">
+        <div class="text-3xl font-display italic text-rust">1</div>
+        <div>
+          <p class="font-semibold text-white mb-1">Initialize configuration</p>
+          <p class="text-sm text-muted leading-relaxed mb-3">Choose a provider. SkillBench creates <code class="bg-warm px-1 rounded">skill-bench.json</code> with your API key, model, timeout, and the shell commands the agent is allowed to run.</p>
+          <p class="text-xs text-muted">Providers: OpenAI, Anthropic, Gemini, Azure, Ollama, Groq, DeepSeek, OpenCode</p>
+        </div>
+        <pre><code>skill-bench init --openai</code></pre>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="grid md:grid-cols-[48px_1fr_1fr] gap-6 items-start">
+        <div class="text-3xl font-display italic text-rust">2</div>
+        <div>
+          <p class="font-semibold text-white mb-1">Write a skill</p>
+          <p class="text-sm text-muted leading-relaxed mb-3">A skill is free-form Markdown in <code class="bg-warm px-1 rounded">skills/my-service/SKILL.md</code>. It contains the patterns, hard rules, code examples, and return-format expectations you want the agent to follow.</p>
+          <p class="text-xs text-muted">Shorter skills usually beat longer ones — the agent has a context window.</p>
+        </div>
+        <pre><code>skill-bench skill new my-service \
+  --mode=rails \
+  --template=service_object</code></pre>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="grid md:grid-cols-[48px_1fr_1fr] gap-6 items-start">
+        <div class="text-3xl font-display italic text-rust">3</div>
+        <div>
+          <p class="font-semibold text-white mb-1">Create an eval</p>
+          <p class="text-sm text-muted leading-relaxed mb-3">An eval has two files: <code class="bg-warm px-1 rounded">task.md</code> (the specific coding task for the agent) and <code class="bg-warm px-1 rounded">criteria.json</code> (the scoring rules). Or generate both automatically from a skill.</p>
+          <p class="text-xs text-muted">max_score values across all dimensions must sum to exactly 100.</p>
+        </div>
+        <pre><code>skill-bench eval new my-eval \
+  --runtime=rails
+
+# or auto-generate from skill:
+skill-bench eval generate my-service \
+  --name my-eval</code></pre>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="grid md:grid-cols-[48px_1fr_1fr] gap-6 items-start">
+        <div class="text-3xl font-display italic text-rust">4</div>
+        <div>
+          <p class="font-semibold text-white mb-1">Run the eval</p>
+          <p class="text-sm text-muted leading-relaxed mb-3">SkillBench runs the baseline, then the context agent, judges both outputs, computes deltas, records history, and prints the verdict table.</p>
+          <p class="text-xs text-muted">Results are appended to <code class="bg-warm px-1 rounded">.skill-bench-history.json</code> for trend tracking.</p>
+        </div>
+        <pre><code>skill-bench run my-eval \
+  --skill=my-service
+
+# chain multiple skills:
+skill-bench run my-eval \
+  --skill=skill-a \
+  --skill=skill-b</code></pre>
+      </div>
+
+    </div>
+
+    <!-- File map -->
+    <div class="mt-14">
+      <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-5">What lands on disk</p>
+      <div class="bg-ink text-white rounded-2xl p-6 md:p-8 overflow-x-auto">
+        <pre style="background:transparent; padding:0; color:#e8e0d5; font-size:0.8rem; line-height:1.8"><code>project-root/
+├── skill-bench.json              <span style="color:#94a3b8"># you write once (init)</span>
+├── skills/
+│   └── my-service/
+│       └── SKILL.md              <span style="color:#94a3b8"># you write and iterate</span>
+├── evals/
+│   └── my-eval/
+│       ├── task.md               <span style="color:#94a3b8"># agent's coding task</span>
+│       └── criteria.json         <span style="color:#94a3b8"># scoring rules</span>
+└── .skill-bench-history.json     <span style="color:#b5451b"># auto-generated, never edit</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 5 — SCORING: THE 5 DIMENSIONS
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">The Scoring Engine</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-4 text-white">Five dimensions, always blind</h2>
+    <p class="text-muted text-lg mb-12 max-w-2xl">Every <code class="bg-warm px-1.5 py-0.5 rounded text-sm">criteria.json</code> must include these five dimensions. Their <code class="bg-warm px-1.5 py-0.5 rounded text-sm">max_score</code> values must sum to 100. You can add custom dimensions (e.g. <em>performance</em>) as long as the total remains 100.</p>
+
+    <div class="grid grid-sm-2-lg-3 gap-4 mb-12">
+      <div class="dim-card p-5">
+        <div class="flex justify-between items-start mb-2">
+          <p class="font-semibold text-white text-sm">Correctness</p>
+          <span class="text-xs font-mono text-muted bg-border/60 px-2 py-0.5 rounded">25–35</span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">Does the output fulfill the task requirements? Are all specified behaviors present and correct?</p>
+      </div>
+      <div class="dim-card p-5">
+        <div class="flex justify-between items-start mb-2">
+          <p class="font-semibold text-white text-sm">Skill Adherence</p>
+          <span class="text-xs font-mono text-muted bg-border/60 px-2 py-0.5 rounded">20–30</span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">Did the agent follow the specific patterns, hard gates, and workflows defined in the skill?</p>
+      </div>
+      <div class="dim-card p-5">
+        <div class="flex justify-between items-start mb-2">
+          <p class="font-semibold text-white text-sm">Code Quality</p>
+          <span class="text-xs font-mono text-muted bg-border/60 px-2 py-0.5 rounded">15–25</span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">Is the code clean, well-structured, free of smells, follows SRP, and avoids duplication?</p>
+      </div>
+      <div class="dim-card p-5">
+        <div class="flex justify-between items-start mb-2">
+          <p class="font-semibold text-white text-sm">Test Coverage</p>
+          <span class="text-xs font-mono text-muted bg-border/60 px-2 py-0.5 rounded">10–20</span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">Are there meaningful tests? Do they test the right things? Are they following TDD best practices?</p>
+      </div>
+      <div class="dim-card p-5">
+        <div class="flex justify-between items-start mb-2">
+          <p class="font-semibold text-white text-sm">Documentation</p>
+          <span class="text-xs font-mono text-muted bg-border/60 px-2 py-0.5 rounded">5–15</span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">Is there adequate YARD documentation, clear intent, and helpful inline comments where needed?</p>
+      </div>
+      <div class="dim-card p-5 border-dashed">
+        <div class="flex justify-between items-start mb-2">
+          <p class="font-semibold text-muted text-sm">Custom dimension</p>
+          <span class="text-xs font-mono text-muted bg-border/60 px-2 py-0.5 rounded">optional</span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">Add any domain-specific dimension (e.g. <em>performance</em>, <em>security</em>). Still counts toward the 100-point total.</p>
+      </div>
+    </div>
+
+    <!-- Pass/fail logic -->
+    <div class="glass-card p-6 md:p-8">
+      <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-5">Pass/fail logic — both conditions must be true</p>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="dim-card p-4" style="border-color: rgba(42,107,110,0.3);">
+          <p class="text-teal font-semibold text-sm mb-1">Condition 1</p>
+          <p class="font-mono text-white text-sm">context_total ≥ pass_threshold</p>
+          <p class="text-xs text-muted mt-2">The agent with skill scored high enough. Default threshold: 70.</p>
+        </div>
+        <div class="dim-card p-4" style="border-color: rgba(42,107,110,0.3);">
+          <p class="text-teal font-semibold text-sm mb-1">Condition 2</p>
+          <p class="font-mono text-white text-sm">total_delta ≥ minimum_delta</p>
+          <p class="text-xs text-muted mt-2">The skill made a meaningful difference. Default minimum: 10.</p>
+        </div>
+      </div>
+      <!-- Verdict matrix -->
+      <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-3">Verdict scenarios</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-border">
+              <th class="text-left py-2 pr-4 text-muted font-medium text-xs">Context score</th>
+              <th class="text-left py-2 pr-4 text-muted font-medium text-xs">Delta</th>
+              <th class="text-left py-2 pr-4 text-muted font-medium text-xs">Verdict</th>
+              <th class="text-left py-2 text-muted font-medium text-xs">Why</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/50">
+            <tr class="score-row">
+              <td class="text-white font-mono">87</td>
+              <td class="delta-pos">+55</td>
+              <td><span class="badge-pass px-2 py-0.5 rounded text-xs font-semibold">PASS</span></td>
+              <td class="text-muted text-xs">Both conditions met. Skill helped a lot.</td>
+            </tr>
+            <tr class="score-row">
+              <td class="text-white font-mono">87</td>
+              <td class="delta-neg">−2</td>
+              <td><span class="badge-fail px-2 py-0.5 rounded text-xs font-semibold">FAIL</span></td>
+              <td class="text-muted text-xs">Score fine, but skill made it worse.</td>
+            </tr>
+            <tr class="score-row">
+              <td class="text-white font-mono">65</td>
+              <td class="delta-pos">+15</td>
+              <td><span class="badge-fail px-2 py-0.5 rounded text-xs font-semibold">FAIL</span></td>
+              <td class="text-muted text-xs">Delta good, absolute score too low.</td>
+            </tr>
+            <tr class="score-row">
+              <td class="text-white font-mono">65</td>
+              <td class="delta-pos">+5</td>
+              <td><span class="badge-fail px-2 py-0.5 rounded text-xs font-semibold">FAIL</span></td>
+              <td class="text-muted text-xs">Both conditions failed.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 6 — CONCRETE EXAMPLE (real output)
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">Concrete Example</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-4 text-white">A skill that works: 32 → 87</h2>
+    <p class="text-muted text-lg mb-10 max-w-2xl">This is real output from running a service-object skill eval. The agent without context scored 32/100. With the skill, it scored 87/100 — a +55 delta across all five dimensions.</p>
+
+    <!-- Score table -->
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b-2 border-white">
+            <th class="text-left py-3 pr-6 text-white font-semibold">Dimension</th>
+            <th class="text-right py-3 pr-6 text-muted font-medium text-xs uppercase tracking-wide">Baseline</th>
+            <th class="text-right py-3 pr-6 text-white font-medium text-xs uppercase tracking-wide">Context</th>
+            <th class="text-right py-3 text-teal font-semibold text-xs uppercase tracking-wide">Delta</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-border">
+          <tr class="score-row hover:bg-warm transition-colors">
+            <td class="text-white font-medium py-3 pr-6">Correctness <span class="text-muted font-normal text-xs">(30)</span></td>
+            <td class="text-right pr-6 text-muted font-mono">12</td>
+            <td class="text-right pr-6 text-white font-mono font-semibold">28</td>
+            <td class="text-right delta-pos font-mono">+16</td>
+          </tr>
+          <tr class="score-row hover:bg-warm transition-colors">
+            <td class="text-white font-medium py-3 pr-6">Skill Adherence <span class="text-muted font-normal text-xs">(25)</span></td>
+            <td class="text-right pr-6 text-muted font-mono">5</td>
+            <td class="text-right pr-6 text-white font-mono font-semibold">22</td>
+            <td class="text-right delta-pos font-mono">+17</td>
+          </tr>
+          <tr class="score-row hover:bg-warm transition-colors">
+            <td class="text-white font-medium py-3 pr-6">Code Quality <span class="text-muted font-normal text-xs">(20)</span></td>
+            <td class="text-right pr-6 text-muted font-mono">10</td>
+            <td class="text-right pr-6 text-white font-mono font-semibold">16</td>
+            <td class="text-right delta-pos font-mono">+6</td>
+          </tr>
+          <tr class="score-row hover:bg-warm transition-colors">
+            <td class="text-white font-medium py-3 pr-6">Test Coverage <span class="text-muted font-normal text-xs">(15)</span></td>
+            <td class="text-right pr-6 text-muted font-mono">3</td>
+            <td class="text-right pr-6 text-white font-mono font-semibold">13</td>
+            <td class="text-right delta-pos font-mono">+10</td>
+          </tr>
+          <tr class="score-row hover:bg-warm transition-colors">
+            <td class="text-white font-medium py-3 pr-6">Documentation <span class="text-muted font-normal text-xs">(10)</span></td>
+            <td class="text-right pr-6 text-muted font-mono">2</td>
+            <td class="text-right pr-6 text-white font-mono font-semibold">8</td>
+            <td class="text-right delta-pos font-mono">+6</td>
+          </tr>
+          <tr class="border-t-2 border-white">
+            <td class="text-white font-bold py-3 pr-6">TOTAL</td>
+            <td class="text-right pr-6 text-muted font-mono font-bold">32/100</td>
+            <td class="text-right pr-6 text-white font-mono font-bold">87/100</td>
+            <td class="text-right delta-pos font-mono font-bold">+55</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-10">
+      <span class="badge-pass px-4 py-1.5 rounded-lg text-sm font-bold">VERDICT: PASS</span>
+      <span class="text-muted text-sm">threshold: 70 &nbsp;·&nbsp; minimum delta: 10 &nbsp;·&nbsp; TREND: context ↑ (+7)</span>
+    </div>
+
+    <!-- Trend explanation -->
+    <div class="dim-card p-6">
+      <p class="font-semibold text-white text-sm mb-2">What the TREND line tells you</p>
+      <p class="text-muted text-sm leading-relaxed">After each run, SkillBench appends to <code class="bg-border/60 px-1 rounded text-xs">.skill-bench-history.json</code>. The TREND compares the current run against the <em>previous</em> run of the same eval + skill. <span class="text-white font-medium">↑ (+7)</span> means the context score improved by 7 points since the last run — your last SKILL.md edit worked. <span class="text-white font-medium">→ (0)</span> means the score is stable. A negative trend means a recent edit made things worse.</p>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 7 — REACT AGENT & PROVIDERS
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">Under the Hood</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-12 text-white">The agent that runs each eval</h2>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-14">
+      <!-- ReAct loop -->
+      <div>
+        <p class="font-semibold text-white mb-4">ReAct loop: Thought → Tool → Observation</p>
+        <p class="text-muted text-sm leading-relaxed mb-5">The agent is not a one-shot prompt. It uses a stateful <strong class="text-white">Thought → Tool → Observation</strong> loop to handle multi-step engineering tasks — reading files, writing code, running tests, and checking output.</p>
+
+        <!-- ReAct SVG -->
+        <svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-sm">
+          <defs>
+            <marker id="arrow2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#94a3b8" />
+            </marker>
+          </defs>
+          <!-- Thought -->
+          <rect x="10" y="45" width="80" height="50" rx="8" fill="#141c28" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+          <text x="50" y="68" text-anchor="middle" dominant-baseline="middle" font-size="11" font-family="DM Mono,monospace" fill="#ffffff" font-weight="600">Thought</text>
+          <text x="50" y="84" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="DM Mono,monospace" fill="#94a3b8">plan next</text>
+          <text x="50" y="96" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="DM Mono,monospace" fill="#94a3b8">action</text>
+          <!-- Tool -->
+          <rect x="110" y="45" width="80" height="50" rx="8" fill="rgba(181,69,27,0.12)" stroke="#b5451b" stroke-width="1.5"/>
+          <text x="150" y="68" text-anchor="middle" dominant-baseline="middle" font-size="11" font-family="DM Mono,monospace" fill="#b5451b" font-weight="600">Tool</text>
+          <text x="150" y="84" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="DM Mono,monospace" fill="#b5451b">read_file</text>
+          <text x="150" y="96" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="DM Mono,monospace" fill="#b5451b">write_file</text>
+          <!-- Observation -->
+          <rect x="210" y="45" width="80" height="50" rx="8" fill="rgba(42,107,110,0.12)" stroke="#2a6b6e" stroke-width="1.5"/>
+          <text x="250" y="68" text-anchor="middle" dominant-baseline="middle" font-size="11" font-family="DM Mono,monospace" fill="#2a6b6e" font-weight="600">Observe</text>
+          <text x="250" y="84" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="DM Mono,monospace" fill="#2a6b6e">result of</text>
+          <text x="250" y="96" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="DM Mono,monospace" fill="#2a6b6e">tool call</text>
+          <!-- Arrows -->
+          <line x1="90" y1="70" x2="108" y2="70" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow2)"/>
+          <line x1="190" y1="70" x2="208" y2="70" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow2)"/>
+          <!-- Loop back -->
+          <path d="M290,70 Q300,20 150,20 Q50,20 10,70" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow2)"/>
+          <text x="150" y="14" text-anchor="middle" font-size="9" font-family="DM Mono,monospace" fill="#94a3b8">loop until done</text>
+        </svg>
+      </div>
+
+      <!-- Providers -->
+      <div>
+        <p class="font-semibold text-white mb-4">Multi-provider ecosystem</p>
+        <p class="text-muted text-sm leading-relaxed mb-5">The <code class="bg-warm px-1 rounded text-xs">BaseClient</code> uses the Template Method pattern so every provider shares the same connection setup, error logging, and response normalization. Swap providers by editing one line in <code class="bg-warm px-1 rounded text-xs">skill-bench.json</code>.</p>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">OpenAI</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">Anthropic</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">Google Gemini</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">Azure OpenAI</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">Ollama (local)</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">Groq</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">DeepSeek</div>
+          <div class="dim-card px-4 py-2.5 text-sm font-medium text-white">OpenCode</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security callout -->
+    <div class="bg-ink text-white rounded-2xl p-6 md:p-8">
+      <p class="text-rust text-xs font-semibold tracking-widest uppercase mb-3">Security model</p>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm">
+        <div>
+          <p class="font-semibold mb-1">Command allowlist</p>
+          <p class="text-gray-light text-xs leading-relaxed">By default, no shell commands are permitted. You explicitly list what's allowed in <code class="text-white bg-white/10 px-1 rounded">skill-bench.json</code> — e.g. <code class="text-white">"rspec", "bundle", "git"</code>. Dangerous commands (<code class="text-white">bash, curl, sudo</code>) are always blocked.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1">Atomic history writes</p>
+          <p class="text-gray-light text-xs leading-relaxed">History is written with file locking. If you kill the process mid-write, SkillBench recovers from the auto-generated <code class="text-white">.skill-bench-history.json.bak</code> backup.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1">Path validation</p>
+          <p class="text-gray-light text-xs leading-relaxed">Eval paths are validated to prevent directory traversal attacks. The agent cannot escape the sandbox.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1">373+ tests</p>
+          <p class="text-gray-light text-xs leading-relaxed">Core engine, CLI commands, and all provider clients are covered. Tests use WebMock for HTTP stubbing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 8 — ITERATION LOOP
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">Iterating on Skills</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-4 text-white">Skills improve through feedback</h2>
+    <p class="text-muted text-lg mb-12 max-w-2xl">A good skill is rarely written in one pass. The history file is your guide. Focus on the dimension with the smallest delta — that is where your skill is weakest.</p>
+
+    <!-- Iteration flow -->
+    <div class="relative">
+      <!-- Vertical line -->
+      <div class="absolute left-5 top-8 bottom-8 w-px bg-border hidden sm:block"></div>
+
+      <div class="space-y-6">
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-rust text-white rounded-full flex items-center justify-center text-sm font-bold relative z-10">1</div>
+          <div class="pt-1">
+            <p class="font-semibold text-white mb-1">Run the eval and read the table</p>
+            <p class="text-muted text-sm">Look at two things: (1) did it pass? (2) which dimension has the smallest delta?</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-rust text-white rounded-full flex items-center justify-center text-sm font-bold relative z-10">2</div>
+          <div class="pt-1">
+            <p class="font-semibold text-white mb-1">Inspect history</p>
+            <p class="text-muted text-sm"><code class="bg-warm px-1 rounded text-xs">cat .skill-bench-history.json | jq '.[-1]'</code> — focus on the weakest dimension.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-rust text-white rounded-full flex items-center justify-center text-sm font-bold relative z-10">3</div>
+          <div class="pt-1">
+            <p class="font-semibold text-white mb-1">Edit SKILL.md with a concrete rule</p>
+            <p class="text-muted text-sm">If <em>test_coverage</em> delta was +3, add a rule: "Include at least one happy-path and one error-path test using <code class="bg-warm px-1 rounded text-xs">let</code> and <code class="bg-warm px-1 rounded text-xs">subject</code>."</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-rust text-white rounded-full flex items-center justify-center text-sm font-bold relative z-10">4</div>
+          <div class="pt-1">
+            <p class="font-semibold text-white mb-1">Re-run and watch the trend</p>
+            <p class="text-muted text-sm">If <em>test_coverage</em> jumped from +3 to +8 and the TREND shows <code class="bg-warm px-1 rounded text-xs">context ↑ (+5)</code>, the edit worked.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start">
+          <div class="flex-shrink-0 w-10 h-10 bg-teal text-white rounded-full flex items-center justify-center text-sm font-bold relative z-10">✓</div>
+          <div class="pt-1">
+            <p class="font-semibold text-white mb-1">Stop when stable</p>
+            <p class="text-muted text-sm">Context score ~95+ and deltas are flat across 2-3 consecutive runs. Your skill is mature.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider border-t mx-6 md:px-16" />
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 9 — WHAT TO DO NEXT
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-20 px-6 md:px-16 max-w-5xl mx-auto">
+    <p class="text-rust font-semibold tracking-widest text-xs uppercase mb-4">What to do next</p>
+    <h2 class="font-display text-4xl md:text-5xl mb-10 text-white">Start in five minutes</h2>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-12">
+      <div class="glass-card p-6">
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-3">Install</p>
+        <pre class="text-xs mb-3"><code>gem install ruby-skill-bench</code></pre>
+        <p class="text-muted text-xs">Requires Ruby 3.1+.</p>
+      </div>
+      <div class="glass-card p-6">
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-3">Initialize</p>
+        <pre class="text-xs mb-3"><code>skill-bench init --openai</code></pre>
+        <p class="text-muted text-xs">Creates <code class="bg-warm px-0.5 rounded">skill-bench.json</code>. Set your API key.</p>
+      </div>
+      <div class="glass-card p-6">
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-3">Run your first eval</p>
+        <pre class="text-xs mb-3"><code>skill-bench run my-eval \
+  --skill=my-service</code></pre>
+        <p class="text-muted text-xs">Watch the delta table.</p>
+      </div>
+    </div>
+
+    <!-- Output formats -->
+    <div class="dim-card p-6 mb-8">
+      <p class="font-semibold text-white text-sm mb-3">Output formats for CI/CD</p>
+      <div class="flex flex-wrap gap-3">
+        <code class="bg-warm border border-border px-3 py-1.5 rounded text-xs">skill-bench run my-eval --skill=x</code>
+        <code class="bg-warm border border-border px-3 py-1.5 rounded text-xs">--format json</code>
+        <code class="bg-warm border border-border px-3 py-1.5 rounded text-xs">--format junit</code>
+      </div>
+      <p class="text-muted text-xs mt-3">JUnit XML integrates with GitHub Actions. The repo includes a CI workflow at <code class="bg-warm px-1 rounded">.github/workflows/ci.yml</code>.</p>
+    </div>
+
+    <!-- Final quote -->
+    <div class="border-l-4 border-rust pl-6 py-2">
+      <p class="text-white text-xl md:text-2xl font-medium font-display italic leading-snug">
+        "A skill that only beats baseline marginally is under-specified — it should change the model's output meaningfully."
+      </p>
+      <p class="text-muted text-sm mt-3">— Ruby Skill Bench docs</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════ -->
+  <footer class="py-10 px-6 md:px-16 max-w-5xl mx-auto">
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;">
+      <a href="/" style="color: #ffffff; text-decoration: none; font-weight: 600;">Home</a>
+      <a href="/ruby-skill-bench/" style="color: #94a3b8; text-decoration: none;">ruby-skill-bench</a>
+      <a href="/rails-ai-bridge-site/" style="color: #94a3b8; text-decoration: none;">rails-ai-bridge</a>
+      <a href="/rails-agent-skills-site/" style="color: #94a3b8; text-decoration: none;">rails-agent-skills</a>
+      <a href="/#writing" style="color: #94a3b8; text-decoration: none;">Writing</a>
+      <a href="/#connect" style="color: #94a3b8; text-decoration: none;">Connect</a>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div>
+        <p class="font-semibold text-white text-sm mb-1">Ruby Skill Bench</p>
+        <p class="text-muted text-xs">A high-fidelity evaluation engine for benchmarking AI agent skills.</p>
+      </div>
+      <div class="text-muted text-xs space-y-1 text-right">
+        <p><code class="bg-warm px-1 rounded">gem install ruby-skill-bench</code></p>
+        <p>Rails-first · extensible · 8 providers · 373+ tests</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

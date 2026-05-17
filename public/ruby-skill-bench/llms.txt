@@ -1,0 +1,44 @@
+# Ruby Skill Bench
+
+> A high-fidelity evaluation engine for benchmarking AI agent skills across any stack (Rails-first, but extensible).
+> It runs an agent twice — once without skill context (baseline) and once with it (context) — then uses a blind LLM judge to score both outputs independently across 5 dimensions. The difference is the skill's measurable ROI.
+
+Ruby Skill Bench is a Ruby gem (`ruby-skill-bench`) distributed via RubyGems. It provides a CLI (`skill-bench`) and a programmatic Ruby API. It supports 8 LLM providers: OpenAI, Anthropic, Google Gemini, Azure OpenAI, Ollama, Groq, DeepSeek, and OpenCode.
+
+The core evaluation loop:
+1. `skill-bench init` — creates `skill-bench.json` with provider config and allowed shell commands
+2. `skill-bench skill new` — scaffolds a `skills/<name>/SKILL.md` with the agent instructions
+3. `skill-bench eval new` (or `eval generate`) — creates `evals/<name>/task.md` + `criteria.json`
+4. `skill-bench run <eval> --skill=<name>` — runs baseline + context agents, judges both, prints delta table
+
+Every run executes inside an isolated Git sandbox (`Dir.mktmpdir`). State changes are captured as a `git diff`. The host filesystem is never modified. Sandboxes are deleted after each run.
+
+The judge scores both outputs blindly (two separate LLM calls, never comparing them side-by-side) across 5 mandatory dimensions: Correctness, Skill Adherence, Code Quality, Test Coverage, and Documentation. `max_score` values in `criteria.json` must sum to 100. Custom dimensions are allowed.
+
+Pass/fail requires both: `context_total >= pass_threshold` AND `total_delta >= minimum_delta`. A skill that scores well but shows a negative delta still fails — it means the skill hurt the agent.
+
+Results are appended to `.skill-bench-history.json` for trend tracking across runs.
+
+## Docs
+
+- [README](README.md): Full usage reference — 4-step flow, CLI commands, scoring engine, criteria.json format, output format, iteration workflow, reliability and security model
+- [Architecture](docs/architecture.md): Component breakdown (RunnerService, ReactAgent, EvaluationRunner, DeltaReport, Judge, Sandbox, BaseClient), data flow between components, directory conventions
+- [First Eval Guide](docs/first-eval-guide.md): 5-minute quickstart — install, init, write a skill, create an eval, run it
+
+## Source
+
+- [CLI entry point](lib/skill_bench/cli.rb): Thor-based CLI — InitCommand, RunCommand, SkillCommand, EvalCommand
+- [RunnerService](lib/skill_bench/services/): Orchestrates baseline + context agent runs; resolves eval, skill, and provider
+- [ReactAgent](lib/skill_bench/agent.rb): Stateful Thought → Tool → Observation loop
+- [EvaluationRunner](lib/skill_bench/evaluation.rb): Blind judging — builds JudgePrompt, calls Judge twice, delegates to DeltaReport
+- [DeltaReport](lib/skill_bench/delta_report.rb): Per-dimension delta computation and pass/fail verdict
+- [Judge](lib/skill_bench/judge.rb): LLM call that scores a single agent output against criteria
+- [Clients](lib/skill_bench/clients/): Provider-agnostic BaseClient (Template Method pattern) + per-provider implementations
+- [OutputFormatter](lib/skill_bench/output_formatter.rb): Human-readable, JSON, and JUnit XML output formats
+- [TemplateRegistry](lib/skill_bench/services/): Programmatic eval scaffolding — 3 template types × 10 Rails pattern categories
+
+## Optional
+
+- [Testing Guide](docs/testing-guide.md): Test structure, how to run evaluations, how to create new eval tasks
+- [CHANGELOG](CHANGELOG.md): Release history
+- [Gemspec](ruby-skill-bench.gemspec): Dependencies and gem metadata
