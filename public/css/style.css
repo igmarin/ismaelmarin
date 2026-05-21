@@ -24,7 +24,6 @@ body {
   line-height: 1.7;
   min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
 }
 
 /* NOISE TEXTURE AND ANIMATED ORBS */
@@ -84,39 +83,63 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  width: 100%;
+  z-index: 1000;
   padding: 1.2rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(6, 11, 19, 0.7);
+  background: rgba(6, 11, 19, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Ensure sections have proper padding to account for fixed header */
+section {
+  scroll-margin-top: 80px;
+}
+
 .nav-logo {
   font-family: 'DM Serif Display', serif;
   font-size: 1.2rem;
+  font-weight: 400;
   color: var(--white);
   text-decoration: none;
   letter-spacing: 0.02em;
+  display: inline-block;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-.nav-logo span { color: var(--secondary); }
+.nav-logo span { 
+  color: var(--secondary); 
+  font-weight: 400;
+}
 
 .nav-links {
   display: flex;
   gap: 2rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
   color: var(--gray);
   text-decoration: none;
-  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   transition: color 0.3s, text-shadow 0.3s;
 }
 
@@ -212,7 +235,11 @@ nav {
   line-height: 1.8;
 }
 
-.hero-desc strong { color: var(--white); font-weight: 500; }
+.hero-desc strong { 
+  color: var(--white); 
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
+}
 
 .hero-cta {
   display: flex;
@@ -221,14 +248,9 @@ nav {
 }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.8rem;
   font-family: 'DM Mono', monospace;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
@@ -401,7 +423,7 @@ section {
 .project-name {
   font-family: 'DM Mono', monospace;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--white);
   text-decoration: none;
   display: flex;
@@ -548,11 +570,15 @@ section {
 .writing-item-content { flex: 1; }
 
 .writing-item-title {
+  font-family: 'DM Serif Display', serif;
   font-size: 1rem;
   color: var(--white);
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 0.3rem;
   transition: color 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .writing-item:hover .writing-item-title {
@@ -632,10 +658,14 @@ section {
 }
 
 .connect-card-value {
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(0.7rem, 4vw, 0.85rem);
   color: var(--white);
-  font-weight: 500;
+  font-weight: 400;
   overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* FOOTER */
@@ -686,8 +716,30 @@ footer a:hover {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .hero { padding-top: 6rem; }
-  body::before, body::after { filter: blur(50px); }
+  .nav-links { 
+    display: none;
+  }
+  .projects-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .hero { 
+    padding-top: 6rem; 
+  }
+  body::before, 
+  body::after { 
+    filter: blur(50px); 
+  }
+  
+  /* Adjust scroll margin for mobile */
+  section {
+    scroll-margin-top: 60px;
+  }
+  
+  nav {
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav-logo {
+    font-size: 1rem;
+  }
 }
