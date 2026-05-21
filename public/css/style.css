@@ -14,14 +14,17 @@
   --border-hover: rgba(6, 182, 212, 0.4);
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  font-size: 17px;
+}
 
 body {
   background: var(--bg);
   color: var(--white);
   font-family: 'DM Mono', monospace;
-  font-weight: 300;
-  line-height: 1.7;
+  font-weight: 400;
+  line-height: 1.8;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -165,12 +168,12 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--secondary);
   margin-bottom: 1.5rem;
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1.2rem;
   background: rgba(6, 182, 212, 0.1);
   border: 1px solid rgba(6, 182, 212, 0.3);
   border-radius: 30px;
@@ -257,6 +260,8 @@ section {
   border-radius: 4px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  padding: 1rem 2rem;
+  display: inline-block;
 }
 
 .btn-primary {
@@ -314,7 +319,7 @@ section {
   align-items: center;
   gap: 0.5rem;
   color: var(--gray);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   animation: float 3s ease-in-out infinite;
@@ -341,7 +346,7 @@ section {
 }
 
 .section-label {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--secondary);
@@ -434,8 +439,8 @@ section {
 .project-name:hover { color: var(--secondary); }
 
 .project-badge {
-  font-size: 0.6rem;
-  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
   background: rgba(139, 92, 246, 0.15);
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 4px;
@@ -458,12 +463,12 @@ section {
 }
 
 .project-features li {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--gray);
-  padding: 0.35rem 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
 }
 
 .project-features li::before {
@@ -490,8 +495,8 @@ section {
 }
 
 .tool-tag {
-  font-size: 0.65rem;
-  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -646,7 +651,7 @@ section {
 }
 
 .connect-card-label {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gray);
@@ -674,7 +679,7 @@ footer {
   padding: 3rem 2rem;
   text-align: center;
   color: var(--gray);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.08em;
   background: rgba(0, 0, 0, 0.2);
 }
@@ -687,6 +692,33 @@ footer a {
 
 footer a:hover {
   color: var(--accent);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--secondary);
+}
+
+.footer-links a.active,
+.footer-links a.footer-link-active {
+  color: var(--white);
+  font-weight: 600;
 }
 
 /* DIVIDER */

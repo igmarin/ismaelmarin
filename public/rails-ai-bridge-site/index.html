@@ -375,9 +375,9 @@
               not generic Rails patterns.
             </p>
             <div class="flex flex-wrap gap-4">
-              <span class="inline-block bg-rust text-white px-5 py-2.5 rounded-full text-sm font-medium">Zero config</span>
-              <span class="inline-block bg-teal text-white px-5 py-2.5 rounded-full text-sm font-medium">Read-only</span>
-              <span class="inline-block bg-ink text-white px-5 py-2.5 rounded-full text-sm font-medium">Open source</span>
+              <span class="inline-block bg-rust text-white px-7 py-2.5 rounded-full text-sm font-medium">Zero config</span>
+              <span class="inline-block bg-teal text-white px-7 py-2.5 rounded-full text-sm font-medium">Read-only</span>
+              <span class="inline-block bg-ink text-white px-7 py-2.5 rounded-full text-sm font-medium">Open source</span>
             </div>
           </div>
           <div class="hidden lg:flex justify-center items-center">
@@ -499,9 +499,12 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <!-- Layer 1: Static -->
-          <div class="relative">
-            <div class="absolute -top-3 left-6 bg-rust text-white text-xs font-bold px-3 py-1 rounded-full">LAYER 1</div>
-            <div class="glass-card rounded-2xl p-8 pt-10">
+          <div>
+            <div class="glass-card rounded-2xl p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-rust font-mono text-xs font-bold uppercase tracking-wider">Layer 1</span>
+                <div class="flex-1 h-px bg-gradient-to-r from-rust/30 to-transparent"></div>
+              </div>
               <h3 class="text-2xl font-bold text-ink mb-3">Static context files</h3>
               <p class="text-ink/70 mb-6 leading-relaxed">
                 Compact, assistant-specific files generated once and committed to your repo.
@@ -530,9 +533,12 @@
           </div>
 
           <!-- Layer 2: Live -->
-          <div class="relative">
-            <div class="absolute -top-3 left-6 bg-teal text-white text-xs font-bold px-3 py-1 rounded-full">LAYER 2</div>
-            <div class="glass-card rounded-2xl p-8 pt-10">
+          <div>
+            <div class="glass-card rounded-2xl p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-teal font-mono text-xs font-bold uppercase tracking-wider">Layer 2</span>
+                <div class="flex-1 h-px bg-gradient-to-r from-teal/30 to-transparent"></div>
+              </div>
               <h3 class="text-2xl font-bold text-ink mb-3">Live MCP tools</h3>
               <p class="text-ink/70 mb-6 leading-relaxed">
                 A read-only server that answers exact questions on demand.
@@ -655,13 +661,13 @@
           <!-- Example 1: Summary -->
           <div class="bg-ink rounded-2xl p-6 md:p-8">
             <div class="flex items-center gap-3 mb-5">
-              <span class="bg-rust text-white text-xs font-bold px-2.5 py-1 rounded">REQUEST</span>
+              <span class="bg-rust text-white text-xs font-bold px-7 py-2.5 rounded">REQUEST</span>
               <span class="text-warmgray font-mono text-sm">rails_get_schema</span>
             </div>
             <pre class="code-block text-warmgray/90 overflow-x-auto"><code>{"detail": "summary"}</code></pre>
 
             <div class="flex items-center gap-3 my-5">
-              <span class="bg-teal text-white text-xs font-bold px-2.5 py-1 rounded">RESPONSE</span>
+              <span class="bg-teal text-white text-xs font-bold px-7 py-2.5 rounded">RESPONSE</span>
             </div>
             <pre class="code-block text-warmgray/90 overflow-x-auto"><code>users ............... 12 columns
 orders .............. 8 columns
@@ -674,13 +680,13 @@ categories .......... 4 columns</code></pre>
           <!-- Example 2: Drill-in -->
           <div class="bg-ink rounded-2xl p-6 md:p-8">
             <div class="flex items-center gap-3 mb-5">
-              <span class="bg-rust text-white text-xs font-bold px-2.5 py-1 rounded">REQUEST</span>
+              <span class="bg-rust text-white text-xs font-bold px-7 py-2.5 rounded">REQUEST</span>
               <span class="text-warmgray font-mono text-sm">rails_get_model_details</span>
             </div>
             <pre class="code-block text-warmgray/90 overflow-x-auto"><code>{"model": "Order"}</code></pre>
 
             <div class="flex items-center gap-3 my-5">
-              <span class="bg-teal text-white text-xs font-bold px-2.5 py-1 rounded">RESPONSE</span>
+              <span class="bg-teal text-white text-xs font-bold px-7 py-2.5 rounded">RESPONSE</span>
             </div>
             <pre class="code-block text-warmgray/90 overflow-x-auto"><code>belongs_to :user
 has_many :order_items
@@ -700,9 +706,9 @@ enum status: { pending: 0, paid: 1, shipped: 2 }</code></pre>
             Models are classified by importance so the AI knows where to focus first:
           </p>
           <div class="flex flex-wrap gap-3">
-            <span class="bg-rust text-white px-4 py-2 rounded-lg text-sm font-medium">core_entity — User, Order</span>
-            <span class="bg-teal text-white px-4 py-2 rounded-lg text-sm font-medium">rich_join — OrderItem</span>
-            <span class="bg-softgray text-white px-4 py-2 rounded-lg text-sm font-medium">supporting — AuditLog</span>
+            <span class="bg-rust text-white px-7 py-3 rounded-lg text-sm font-medium">core_entity — User, Order</span>
+            <span class="bg-teal text-white px-7 py-3 rounded-lg text-sm font-medium">rich_join — OrderItem</span>
+            <span class="bg-softgray text-white px-7 py-3 rounded-lg text-sm font-medium">supporting — AuditLog</span>
           </div>
         </div>
       </div>
@@ -802,20 +808,20 @@ enum status: { pending: 0, paid: 1, shipped: 2 }</code></pre>
 
     <!-- Footer -->
     <footer>
-      <div class="max-w-6xl mx-auto" style="padding: 0 1.5rem;">
         <div class="footer-links">
-          <a href="/" class="footer-link-active">Home</a>
+          <a href="/">Home</a>
           <a href="/ruby-skill-bench/">ruby-skill-bench</a>
-          <a href="/rails-ai-bridge-site/">rails-ai-bridge</a>
+          <a href="/rails-ai-bridge-site/" class="footer-link-active">rails-ai-bridge</a>
           <a href="/rails-agent-skills-site/">rails-agent-skills</a>
           <a href="/#writing">Writing</a>
           <a href="/#connect">Connect</a>
         </div>
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p class="text-sm text-softgray">rails-ai-bridge — AI context for Ruby on Rails</p>
-          <p class="text-sm text-softgray">MIT License</p>
-        </div>
-      </div>
+       <p>
+      Built with HTML & CSS — no frameworks, no Jekyll, no dependencies.
+      Just like good software should be.
+      &nbsp;·&nbsp;
+      <a href="https://github.com/igmarin/ismaelmarin">Source</a>
+    </p>
     </footer>
 
   </div>
