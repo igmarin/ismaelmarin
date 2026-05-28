@@ -1,10 +1,10 @@
-import { Server } from "@modelcontextprotocol/sdk/dist/esm/server/index.js";
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import {
   ListResourcesRequestSchema,
   ReadResourceRequestSchema,
   ListToolsRequestSchema,
   CallToolRequestSchema
-} from "@modelcontextprotocol/sdk/dist/esm/types.js";
+} from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
 import { TileConfig } from "./parser.js";
 
