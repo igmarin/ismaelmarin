@@ -2,3 +2,4 @@
 .antigravitycli/
 node_modules/*
 .wrangler/*
+plan.md

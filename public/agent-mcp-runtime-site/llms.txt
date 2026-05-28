@@ -1,0 +1,28 @@
+# Agent MCP Runtime
+
+> A safe Rust CLI for Model Context Protocol (MCP) runtime management. Orchestrates communication between LLMs and external tools via standard I/O streams using the ReAct reasoning pattern.
+
+Agent MCP Runtime is a compiled Rust binary that auto-detects your project framework, resolves skill packs from Git repositories, merges context, and runs a ReAct loop with your chosen LLM provider. It supports Gemini, OpenAI, Claude, and Groq out of the box.
+
+The runtime composes skill packs in layers with priority resolution: local registry (dev/test) > framework packs (auto-detected from Gemfile) > core packs (always loaded) > default planning stack. Higher layers override lower for same-named skills.
+
+Core mechanisms:
+1. **Pack Resolution** — Priority-layered resolution with local, framework, core, and default layers
+2. **ReAct Loop** — Thought → Tool → Observation cycle with configurable max_steps ceiling
+3. **Tool System** — All capabilities implement the `Tool` trait; built-in skills, project context, and remote MCP tools are treated uniformly
+
+Key design decisions: Git packs over embedded skills (independent versioning), subprocess MCP over HTTP MCP (no network overhead), thin LLM trait over provider APIs, mockable traits for testing, frontmatter in Markdown for skill metadata, and zero unsafe Rust (`unsafe_code = "deny"`).
+
+Safety: step ceiling (default max_steps=5), graceful degradation (MCP errors become tool results, context failures are warnings), API keys from env vars only.
+
+## Docs
+
+- [Design doc](https://github.com/igmarin/agent-mcp-runtime/blob/main/docs/design.md): Tradeoffs, alternatives, and full architecture rationale
+- [Architecture](https://github.com/igmarin/agent-mcp-runtime/blob/main/docs/architecture.md): Module structure, ReAct loop internals, subprocess client
+- [Ecosystem overview](https://github.com/igmarin/agent-mcp-runtime/blob/main/docs/ecosystem.md): All repos and how they interact
+- [Getting started](https://github.com/igmarin/agent-mcp-runtime/blob/main/docs/getting_started.md): Build from source, run tests, write custom providers
+
+## Source
+
+- [GitHub](https://github.com/igmarin/agent-mcp-runtime) — Main repository, Rust source code
+- [Install script](https://raw.githubusercontent.com/igmarin/agent-mcp-runtime/main/install.sh) — One-command binary install
