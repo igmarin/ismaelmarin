@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { handle } from 'hono/cloudflare-pages';
-import { handleMcpRequest } from '@igmarin/mcp-skills-tool/dist/worker.js';
-import { createMcpServer } from '@igmarin/mcp-skills-tool/dist/mcp-server.js';
+import { handleMcpRequest } from './lib/worker.js';
+import { createMcpServer } from './lib/mcp-server.js';
 
 // Base path is /mcp to handle all subroutes under the custom subdomains
 const app = new Hono().basePath('/mcp');
