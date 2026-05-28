@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ismaelmarin",
+  "account_id": "d86c866a3d52ed235d37f31024485f4d",
   "compatibility_date": "2026-04-13",
   "pages_build_output_dir": "public"
 }
