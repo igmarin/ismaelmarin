@@ -1,0 +1,16 @@
+{
+  "name": "ismaelmarin-dev",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public"
+  },
+  "dependencies": {
+    "@igmarin/mcp-skills-tool": "file:../mcp-skills-tool",
+    "hono": "^4.12.12"
+  },
+  "devDependencies": {
+    "wrangler": "^4.4.0"
+  }
+}
