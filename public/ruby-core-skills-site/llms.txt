@@ -1,0 +1,27 @@
+# Ruby Core Skills
+
+> Core Ruby skills for AI agent evaluation. A structured library of 16 skills encoding language fundamentals, standard library mastery, and idiomatic patterns for benchmarking.
+
+Three kinds of skills, one consistent format (SKILL.md):
+
+- **Process-Discipline (5)**: tdd-process, refactor-process, review-process, security-review-process, test-planning-process — define rigorous gates and workflows the agent must follow
+- **Atomic (10)**: create-service-object, implement-calculator-pattern, integrate-api-client, define-domain-language, model-domain, review-domain-boundaries, triage-bug, respond-to-review, write-yard-docs, skill-router — define concrete patterns and output structures
+- **Planning (1)**: generate-tdd-tasks — breaks features into structured task lists before the agent builds
+
+Every code-producing skill enforces the same HARD-GATE: Write test → Run test → Verify it FAILS for the right reason → Implement → Verify it PASSES.
+
+Skills chain into complete workflows via the `skill-router`:
+- **TDD Feature Loop**: test-planning → tdd-process → refactor-process → linters → write-yard-docs → review-process → respond-to-review
+- **Bug Fix**: triage-bug → test-planning → tdd-process → refactor-process
+- **Domain Discovery**: define-domain-language → model-domain → review-domain-boundaries
+
+This repository is deliberately agent-free. Agents live in framework-specific repos (rails-agent-skills, hanakai-yaku) that compose core skills.
+
+## Docs
+
+- [README](https://github.com/igmarin/ruby-core-skills): Full reference with skill catalog and workflow chains
+- [SKILL.md files](https://github.com/igmarin/ruby-core-skills/tree/main/skills): Individual skill definitions organized by type
+
+## Source
+
+- [GitHub](https://github.com/igmarin/ruby-core-skills)

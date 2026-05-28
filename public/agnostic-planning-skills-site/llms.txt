@@ -1,0 +1,30 @@
+# Agnostic Planning Skills
+
+> Framework-agnostic AI planning capabilities. Enforces PM and software engineering planning discipline with structured templates for PRDs and task estimation.
+
+A library of 10 skills and 4 orchestrated agents that turn AI coding assistants into disciplined product collaborators. The core rule: no code without an approved PRD. Every skill contains HARD-GATE rules that block the AI from proceeding until artifacts are explicitly approved.
+
+Skills are organized into 5 categories:
+- **PRD**: create-prd (structured requirements document), review-prd (completeness/feasibility evaluation)
+- **Task Management**: generate-tasks (TDD task checklists), plan-tickets (tracker-ready drafts), estimate-tasks (story points/t-shirt sizes with confidence)
+- **Backlog**: prioritize-backlog (RICE, MoSCoW, value-vs-effort matrix)
+- **Ceremony**: plan-sprint (sprint planning with capacity calculation), create-retrospective (what went well, action items)
+- **Execution**: identify-risks (6 risk patterns), generate-status-report (stakeholder summaries)
+
+Agents chain skills into complete workflows:
+- **product-owner**: Discovery → PRD → Review → Tasks → Tickets → Sprint
+- **project-manager**: Estimation → Risk → Tracking → Status
+- **tech-lead**: PRD Review → Feasibility → Estimation Quality → Risk Report (Go/No-Go)
+- **delivery-lead**: Full cycle — Scope → Plan → Prioritize → Sprint → Execute → Retrospect
+
+Skills auto-detect project conventions from existing files (package.json, Gemfile, Cargo.toml) — no configuration required.
+
+## Docs
+
+- [README](https://github.com/igmarin/agnostic-planning-skills): Full reference, install guide, skill catalog
+- [SKILL.md files](https://github.com/igmarin/agnostic-planning-skills/tree/main/skills): Individual skill definitions with HARD-GATE rules and step-by-step processes
+
+## Source
+
+- [GitHub](https://github.com/igmarin/agnostic-planning-skills)
+- Install: `gh skill install igmarin/agnostic-planning-skills` or `npx skills add igmarin/agnostic-planning-skills`

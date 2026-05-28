@@ -1,0 +1,25 @@
+# Hanakai Yaku
+
+> A library of 35 atomic skills and 10 orchestrated agents that turn AI coding assistants into disciplined Hanami collaborators. Enforces TDD and DDD discipline for Hanami 2.x Ruby applications.
+
+Skills are atomic building blocks — each one teaches the AI how to do exactly one thing: create a changeset, define a route, write a migration. Agents are pre-wired workflows that chain skills together into complete tasks: build a CRUD resource, setup a slice, implement authentication.
+
+Every code-producing skill contains a HARD-GATE: tests must exist and fail for the right reason before any implementation code is written. This is the single rule that makes the library work.
+
+**35 skills across 14 categories:**
+Actions (4), CLI (4), Context (1), Cross-cutting (2), Persistence (5), Dependency Injection (2), dry-monads (1), dry-rb (2), Providers (2), Security (1), Routing (1), Slices (5), Testing (3), Views (2)
+
+**10 agents:**
+build-crud-resource, build-api-slice, create-new-slice, hanami-setup, setup-authentication, slice-lifecycle, tdd-loop, validation-contract, add-background-jobs, add-table-column
+
+Every skill uses the same structure: YAML frontmatter, quick reference, HARD-GATE, core process with code examples, and integration table for skill chaining. The `load-context` skill discovers app structure (slices, providers, routes, settings) before any code work begins.
+
+## Docs
+
+- [README](https://github.com/igmarin/hanakai-yaku): Full reference with skill catalog and agent descriptions
+- [CONTEXT.md](https://github.com/igmarin/hanakai-yaku/blob/main/CONTEXT.md): Shared language — 10 core terms every skill uses
+- [SKILL.md files](https://github.com/igmarin/hanakai-yaku/tree/main/skills): Individual skill definitions
+
+## Source
+
+- [GitHub](https://github.com/igmarin/hanakai-yaku)
