@@ -1,5 +1,5 @@
-import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
-import { JSONRPCMessage, JSONRPCMessageSchema } from "@modelcontextprotocol/sdk/types.js";
+import { Transport } from "@modelcontextprotocol/sdk/dist/esm/shared/transport.js";
+import { JSONRPCMessage, JSONRPCMessageSchema } from "@modelcontextprotocol/sdk/dist/esm/types.js";
 
 /**
  * A custom MCP Transport implementation designed for Cloudflare Workers / Pages Functions
