@@ -38,18 +38,24 @@ Tech Lead and Staff Software Engineer with 20 years of remote software developme
 
 ## Professional Experience
 
-### Staff Software Engineer / Tech Lead (Remote)
-**Period**: 2006 — Present
-- **Monolith Scaling**: Maintained and scaled enterprise Rails monoliths, optimizing database queries and caching layers to operate up to 10k+ peak transactions/hour.
-- **Architectural Specs**: Authored 40+ system architecture specifications and Architecture Decision Records (ADRs) to align technical teams on database migrations, dependency updates, and API versions.
-- **High-Performance Rust Tooling**: Designed and built safe Rust command-line tools for concurrent async tasks using Tokio.
-- **Security & Quality**: Maintained rigorous code quality gates using automated testing suites (TDD first) and security tools (Snyk) to reduce production bugs by over 40%.
+### Software Technical Lead / Senior Software Engineer — Dealerware (Remote)
+**Period**: May 2022 — April 2026
+- **Career Progression**: Contracted initially via 3Pillar Global; hired directly due to high performance; promoted from Mid-level to Senior, and subsequently to Software Technical Lead.
+- **Squad Leadership**: Led cross-functional engineering squads, establishing technical directions, mentoring engineers, and coordinating sprint deliverables.
+- **Monolith Scaling**: Owned and scaled core backend monolith and microservices, managing up to 10k+ peak transactions/hour with over 370 merged pull requests.
+- **Architectural Specs**: Authored over 40+ system architecture specifications and Architecture Decision Records (ADRs) to standardize database schemas, background workers, and API versions.
 
-### AI Radio Cohost / Tech Evangelist
-**Podcast/Show**: De Mentes Aumentadas (FM Radio & Spotify)
+### Principal Remote Consultant & Tech Lead (NDA Restricted)
+**Period**: 2006 — Present
+- **Rails Monoliths**: Architected, updated, and scaled complex, high-throughput Ruby on Rails monoliths and APIs for diverse enterprise clients.
+- **High-Performance Rust**: Designed and compiled low-level high-performance tools in Rust for async operations and memory-safe runtimes (Tokio).
+- **Security & Quality**: Led remote developer teams, enforcing coding guidelines, automated testing (TDD/RSpec), and automated security audits (Snyk).
+- **AI Agent Tooling**: Dedicated transition periods to maintaining 7 active open-source AI agent tooling and context protocol (MCP) repositories.
+
+### AI Radio Cohost / Tech Evangelist — De Mentes Aumentadas (FM Radio & Spotify)
 **Period**: 2025 — Present
-- Hosts a syndicated bi-weekly segment discussing AI, LLMs, databrokers, Big Data synchronization, and digital privacy.
-- Translates bleeding-edge artificial intelligence systems concepts into public Spanish-language mass-media broadcasts and podcasts.
+- **Radio Broadcasts**: Hosts a syndicated bi-weekly radio segment explaining artificial intelligence, data privacy, and agentic workflows to the public.
+- **Digital Evagelism**: Syndicates radio recordings as a Spotify podcast, driving thought leadership and technology adoption in the Spanish-speaking community.
 
 ---
 
