@@ -2,13 +2,28 @@
  * Ismael Marín - Elements Interactivity & Logic (elements.js)
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    initMobileMenu();
-    initTerminalWidget();
-    initSpotlightGlows();
-    initSmoothScroll();
-    preventScrollJump();
-});
+(function() {
+    'use strict';
+
+    // Constants
+    const TIMING = {
+        TYPING_SPEED: 60,
+        INTRO_DELAY: 400,
+        OUTPUT_DELAY: 500,
+        START_DELAY: 500,
+        SCROLL_FIX_DELAY: 3000,
+        HEADER_OFFSET: 90
+    };
+
+    // Store timer for cleanup
+    let introTimer = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initMobileMenu();
+        initSpotlightGlows();
+        initSmoothScroll();
+        initTerminalWidget();
+    });
 
 /**
  * Mobile Navigation Drawer Toggle
@@ -69,6 +84,12 @@ function initTerminalWidget() {
     // Clear initial content and build structure
     terminalBody.innerHTML = '';
     
+    // Track if intro is complete
+    let introComplete = false;
+    
+    // Disable scroll during intro to prevent page scroll interference
+    terminalBody.style.overflow = 'hidden';
+    
     // Command history and buffer
     const history = [];
     let historyIndex = -1;
@@ -79,7 +100,12 @@ function initTerminalWidget() {
         line.className = `terminal-line type-${type}`;
         line.innerHTML = html;
         terminalBody.appendChild(line);
-        terminalBody.scrollTop = terminalBody.scrollHeight;
+        // Only auto-scroll after intro is complete
+        if (introComplete) {
+            requestAnimationFrame(() => {
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            });
+        }
     }
 
     // Command runner
@@ -113,8 +139,8 @@ function initTerminalWidget() {
         },
         contact: () => {
             printLine('Connectivity Protocol:<br>' +
-                      '  GitHub   : <a href="#" class="text-tertiary">github.com/igmarin</a><br>' +
-                      '  LinkedIn : <a href="#" class="text-tertiary">linkedin.com/in/igmarin</a><br>' +
+                      '  GitHub   : <a href="https://github.com/igmarin" class="text-tertiary" target="_blank">github.com/igmarin</a><br>' +
+                      '  LinkedIn : <a href="https://linkedin.com/in/ismaelmarin" class="text-tertiary" target="_blank">linkedin.com/in/ismaelmarin</a><br>' +
                       '  Email    : <span class="text-primary">ismael.marin@gmail.com</span>');
         },
         clear: () => {
@@ -147,8 +173,17 @@ function initTerminalWidget() {
         setupPrompt();
     }
 
+    // Helper function to generate terminal prompt HTML
+    function getPromptHTML() {
+        return '<span class="text-primary">welcome</span><span class="text-text-muted">@main</span> <span class="text-tertiary">$</span>';
+    }
+
     // Prompt input creation
     function setupPrompt() {
+        // Mark intro as complete and re-enable terminal scroll
+        introComplete = true;
+        terminalBody.style.overflow = 'auto';
+        
         const promptContainer = document.createElement('div');
         promptContainer.className = 'terminal-prompt-container';
         promptContainer.style.display = 'flex';
@@ -156,7 +191,7 @@ function initTerminalWidget() {
         promptContainer.style.marginTop = '0.5rem';
 
         const promptText = document.createElement('span');
-        promptText.innerHTML = '<span class="text-primary">welcome</span><span class="text-text-muted">@main</span> <span class="text-tertiary">$</span>&nbsp;';
+        promptText.innerHTML = getPromptHTML() + '&nbsp;';
 
         const input = document.createElement('input');
         input.type = 'text';
@@ -168,21 +203,33 @@ function initTerminalWidget() {
         input.style.fontFamily = 'inherit';
         input.style.fontSize = 'inherit';
         input.style.flex = '1';
-        input.style.caretColor = 'var(--color-primary)'; // Use native cursor for authentic terminal behavior
+        input.style.caretColor = 'var(--color-primary)';
 
         promptContainer.appendChild(promptText);
         promptContainer.appendChild(input);
         terminalBody.appendChild(promptContainer);
         
-        input.focus();
+        // Scroll to bottom to show the prompt
+        requestAnimationFrame(() => {
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        });
+        
+        // Don't auto-focus during intro to prevent scroll interference
+        // Focus will happen when user clicks on terminal
 
-        // Terminal click refocus
-        terminalBody.addEventListener('click', () => input.focus());
+        // Terminal click refocus - use event delegation to avoid accumulation
+        const clickHandler = () => input.focus();
+        terminalBody.addEventListener('click', clickHandler);
+        
+        // Store handler for cleanup
+        promptContainer._clickHandler = clickHandler;
 
         // Key handlers
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const val = input.value;
+                // Cleanup event listener before removing
+                terminalBody.removeEventListener('click', promptContainer._clickHandler);
                 promptContainer.remove();
                 executeCommand(val);
             } else if (e.key === 'ArrowUp') {
@@ -225,53 +272,44 @@ function initTerminalWidget() {
             // Typing simulation
             const promptLine = document.createElement('div');
             promptLine.className = 'terminal-line';
-            promptLine.innerHTML = `<span class="text-primary">welcome</span><span class="text-text-muted">@main</span> <span class="text-tertiary">$</span> <span class="typewriter-text"></span><span class="blinking-cursor"></span>`;
+            promptLine.innerHTML = `${getPromptHTML()} <span class="typewriter-text"></span><span class="blinking-cursor"></span>`;
             terminalBody.appendChild(promptLine);
-            terminalBody.scrollTop = terminalBody.scrollHeight;
+            // Don't auto-scroll during intro to prevent page scroll interference
 
             const textSpan = promptLine.querySelector('.typewriter-text');
             const cursor = promptLine.querySelector('.blinking-cursor');
             let charIndex = 0;
 
-            const timer = setInterval(() => {
+            introTimer = setInterval(() => {
                 if (charIndex < current.text.length) {
                     textSpan.textContent += current.text[charIndex];
                     charIndex++;
                 } else {
-                    clearInterval(timer);
+                    clearInterval(introTimer);
                     cursor.remove();
                     step++;
-                    setTimeout(runIntro, 400);
+                    setTimeout(runIntro, TIMING.INTRO_DELAY);
                 }
-            }, 60);
+            }, TIMING.TYPING_SPEED);
         } else {
             // Instant print for command output
             printLine(current.text.replace(/\n/g, '<br>'));
             step++;
-            setTimeout(runIntro, 500);
+            setTimeout(runIntro, TIMING.OUTPUT_DELAY);
         }
     }
 
     // Start intro sequence
-    setTimeout(runIntro, 500);
+    setTimeout(runIntro, TIMING.START_DELAY);
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        if (introTimer) {
+            clearInterval(introTimer);
+        }
+    });
 }
 
-/**
- * Prevent unwanted scroll jumps during page load
- */
-function preventScrollJump() {
-    // Disable smooth scrolling temporarily
-    document.documentElement.style.scrollBehavior = 'auto';
-    
-    // Store initial scroll position
-    const scrollY = window.scrollY;
-    
-    // Restore scroll position and re-enable smooth scrolling after intro completes
-    setTimeout(() => {
-        window.scrollTo(0, scrollY);
-        document.documentElement.style.scrollBehavior = 'smooth';
-    }, 3000); // Give enough time for intro animation to complete
-}
 
 /**
  * 3D Spotlight/Glow Effect following Cursor on Cards
@@ -302,7 +340,7 @@ function initSmoothScroll() {
             const targetEl = document.querySelector(targetId);
             if (targetEl) {
                 e.preventDefault();
-                const headerOffset = 90;
+                const headerOffset = TIMING.HEADER_OFFSET;
                 const elementPosition = targetEl.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -314,3 +352,5 @@ function initSmoothScroll() {
         });
     });
 }
+
+})();
