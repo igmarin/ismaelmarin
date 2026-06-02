@@ -12,43 +12,38 @@
 - **Email**: ismael.marin@gmail.com
 - **Phone**: +52 477 792 9000
 - **Scheduler**: https://cal.com/ismael-marin/lets-talk
+- **Website**: https://ismaelmarin.dev
+- **Resume**: https://ismaelmarin.dev/resume/
 
 ## Open Source Projects
 
 ### ruby-skill-bench
-- **URL**: https://ismaelmarin.dev/ruby-skill-bench/
 - **GitHub**: https://github.com/igmarin/ruby-skill-bench
 - **RubyGems**: https://rubygems.org/gems/ruby-skill-bench
 - **Description**: High-fidelity evaluation engine for benchmarking AI agent skills. Runs an agent twice (baseline vs. with skill), then uses a blind LLM judge to score both outputs across 5 dimensions. The difference is the skill's measurable ROI.
 
 ### rails-ai-bridge
-- **URL**: https://ismaelmarin.dev/rails-ai-bridge-site/
 - **GitHub**: https://github.com/igmarin/rails-ai-bridge
 - **RubyGems**: https://rubygems.org/gems/rails-ai-bridge
 - **Description**: Turn any Rails app into an AI-ready codebase — one command, zero config. Generates static context files (CLAUDE.md, AGENTS.md, .cursorrules, copilot-instructions.md) and runs a live MCP server for real-time Rails introspection.
 
 ### rails-agent-skills
-- **URL**: https://ismaelmarin.dev/rails-agent-skills-site/
 - **GitHub**: https://github.com/igmarin/rails-agent-skills
 - **Description**: Curated AI agent skill library for Ruby on Rails development. 43 executable skills and 9 workflows teaching AI coding tools how to plan, test, implement, document, and review Rails work using production-minded conventions. Tests gate implementation.
 
 ### agent-mcp-runtime
-- **URL**: https://ismaelmarin.dev/agent-mcp-runtime-site/
 - **GitHub**: https://github.com/igmarin/agent-mcp-runtime
 - **Description**: Safe Rust CLI for Model Context Protocol (MCP) runtime management. Orchestrates communication between LLMs and external tools using the ReAct reasoning pattern.
 
 ### ruby-core-skills
-- **URL**: https://ismaelmarin.dev/ruby-core-skills-site/
 - **GitHub**: https://github.com/igmarin/ruby-core-skills
 - **Description**: Core Ruby skills for AI agent evaluation. A structured library of language fundamentals and idiomatic patterns that AI agents are tested against.
 
 ### hanakai-yaku
-- **URL**: https://ismaelmarin.dev/hanakai-yaku-site/
 - **GitHub**: https://github.com/igmarin/hanakai-yaku
 - **Description**: Curated library of atomic development skills and orchestrated agents for AI coding assistants, enforcing TDD and DDD discipline for Hanami 2.x Ruby applications.
 
 ### agnostic-planning-skills
-- **URL**: https://ismaelmarin.dev/agnostic-planning-skills-site/
 - **GitHub**: https://github.com/igmarin/agnostic-planning-skills
 - **Description**: Framework-agnostic AI planning capabilities. Enforces PM and software engineering planning discipline with structured templates for PRDs and task estimation.
 
