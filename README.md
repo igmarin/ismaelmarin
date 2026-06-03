@@ -8,21 +8,25 @@ Built with plain HTML & CSS, deployed to Cloudflare Pages.
 
 ```
 public/
-├── index.html                    # Main homepage (dark theme)
-├── css/style.css                 # Main site styles
+├── index.html                    # Main homepage (stich_design)
+├── design.css                    # Design system stylesheet
+├── elements.js                   # Interactive components (terminal, mobile menu, etc.)
 ├── llms.txt                      # AI-crawler description
 ├── sitemap.xml                   # SEO sitemap
 ├── robots.txt                    # Crawler instructions
-├── ruby-skill-bench/
-│   ├── index.html                # Ruby Skill Bench product page
-│   └── llms.txt                  # Project AI-crawler description
-├── rails-ai-bridge-site/
-│   ├── index.html                # rails-ai-bridge product page
-│   └── llms.txt                  # Project AI-crawler description
-└── rails-agent-skills-site/
-    ├── index.html                # rails-agent-skills product page
-    └── llms.txt                  # Project AI-crawler description
+└── resume/
+    ├── index.html                # Resume page
+    ├── ismael-marin-resume.pdf   # PDF resume
+    └── llms-resume.txt           # Resume AI-crawler description
 ```
+
+## Design System
+
+The site uses a custom design system (stich_design) featuring:
+- **Modern Technical Minimalism** with Glassmorphism and Terminal-inspired accents
+- **Dark-first interface** with Deep Space Navy foundation
+- **Typography**: DM Serif Display (headlines) + DM Mono (body/technical)
+- **Components**: Interactive terminal widget, glass project cards, spotlight glow effects
 
 ## Local preview
 
