@@ -126,16 +126,17 @@ function initTerminalWidget() {
         },
         projects: () => {
             printLine('Selected Projects:<br>' +
-                      '  * <span class="text-primary">Rails AI Bridge</span> - Bridge Rails apps with LLM agents.<br>' +
-                      '  * <span class="text-tertiary">Ruby Skill Bench</span> - Testing & benchmarking for AI.<br>' +
-                      '  * <span class="text-secondary">Search Overhaul</span> - Distributed Elasticsearch/Kafka/Rust engine.');
+                      '  * <span class="text-primary">Rails AI Bridge</span> - Zero-config MCP server for Rails (5,846 downloads).<br>' +
+                      '  * <span class="text-tertiary">Ruby Skill Bench</span> - Benchmarking the ROI of context for AI agents (1,734 downloads).<br>' +
+                      '  * <span class="text-secondary">Brigid</span> - Rust CLI that turns codebases into LLM tutorials (169 downloads).<br>' +
+                      '  * <span class="text-secondary">Elixir Phoenix Skills</span> - 47 agent skills for Phoenix/LiveView/Ecto.');
         },
         skills: () => {
             printLine('Technical Stack Blueprint:<br>' +
-                      '  [Languages]  : Ruby (Mastery), Python, Rust<br>' +
-                      '  [Frameworks] : Rails (20 yrs), FastAPI, LangChain<br>' +
+                      '  [Languages]  : Ruby (Mastery), Elixir/Phoenix, Rust<br>' +
+                      '  [Frameworks] : Rails (20 yrs), Phoenix, Hanami<br>' +
                       '  [Systems]    : PostgreSQL, Kafka, Docker<br>' +
-                      '  [AI Infra]   : Agentic Arch, Vector DBs, Prompt Engineering, LLM APIs & Evals');
+                      '  [AI Infra]   : Agentic Arch, MCP, Vector DBs, Prompt Engineering, LLM APIs & Evals');
         },
         contact: () => {
             printLine('Connectivity Protocol:<br>' +
