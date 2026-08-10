@@ -790,7 +790,7 @@ a {
     border-radius: var(--rounded-full);
 }
 .dot.ruby { background-color: #cc0000; }
-.dot.python { background-color: #3572A5; }
+.dot.elixir { background-color: #6e4a7f; }
 .dot.rust { background-color: #dea584; }
 
 .command-block-accent {
@@ -816,7 +816,7 @@ a {
 }
 @media (min-width: 1024px) {
     .projects-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

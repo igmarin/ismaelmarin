@@ -16,14 +16,14 @@
 
 ## Summary
 
-Tech Lead and Staff Software Engineer with 20 years of remote software development experience. Specialized in scaling enterprise Ruby on Rails monoliths, writing high-performance systems utilities in Rust, and constructing developer-centric Agentic AI integrations & Model Context Protocol (MCP) systems. Host of the syndicated bi-weekly AI radio segment and podcast "De Mentes Aumentadas."
+Staff Software Engineer with 20 years of remote software development experience. Ships production AI tooling across Ruby (Rails), Elixir/Phoenix, and Rust — MCP servers, context bridges, evaluation sandboxes, and memory-safe CLIs. Open-source traction includes 5,846 rails-ai-bridge and 1,734 ruby-skill-bench RubyGems downloads, 169 brigid-core and 242 rs-guard crate downloads, and 47 Elixir/Phoenix agent skills. Host of the syndicated bi-weekly AI radio segment and podcast "De Mentes Aumentadas."
 
 ---
 
 ## Technical Skills
 
 ### Core Backend & Infrastructure
-- **Languages**: Ruby, Rust, Python, SQL, HTML, CSS, JavaScript (Vanilla).
+- **Languages**: Ruby, Elixir, Rust, SQL, HTML, CSS, JavaScript (Vanilla).
 - **Frameworks**: Ruby on Rails (v1 to v8 monoliths and APIs), Hanami (dry-rb, ROM patterns), Sinatra.
 - **Data & Ops**: PostgreSQL, Redis, Docker, Cloudflare Pages/Workers, Vercel, AWS (EC2, S3, RDS), Snyk (Security audits).
 - **Architecture**: Domain-Driven Design (DDD), Clean Architecture, Spec-Driven Design, TDD/BDD (RSpec, Minitest), Architecture Decision Records (ADRs).
@@ -61,20 +61,42 @@ Tech Lead and Staff Software Engineer with 20 years of remote software developme
 
 ## Featured Open Source Projects
 
-### ruby-skill-bench
-- **GitHub**: https://github.com/igmarin/ruby-skill-bench
-- **Role**: Creator / Lead Maintainer
-- **Tech Stack**: Ruby, Git, LLM APIs
-- **Description**: High-fidelity evaluation engine that benchmarks AI agent skills. Runs agents in isolated Git sandboxes twice (baseline vs. with skills) and scores differences across 5 dimensions using a blind LLM judge.
-
 ### rails-ai-bridge
 - **GitHub**: https://github.com/igmarin/rails-ai-bridge
 - **Role**: Creator / Lead Maintainer
+- **Language**: Ruby
+- **Traction**: 5,846 RubyGems downloads
 - **Tech Stack**: Ruby on Rails, Model Context Protocol
 - **Description**: Turn any Rails app into an AI-ready codebase. Generates project context files (CLAUDE.md, AGENTS.md, Cursor rules) and spins up a live MCP server for real-time Rails codebase introspection.
 
-### agent-mcp-runtime
-- **GitHub**: https://github.com/igmarin/agent-mcp-runtime
+### ruby-skill-bench
+- **GitHub**: https://github.com/igmarin/ruby-skill-bench
 - **Role**: Creator / Lead Maintainer
-- **Tech Stack**: Rust, Tokio Async Runtime, Model Context Protocol
-- **Description**: Memory-safe Rust CLI that manages Model Context Protocol (MCP) connections, handling LLM tool-calling loops under the ReAct pattern.
+- **Language**: Ruby
+- **Traction**: 1,734 RubyGems downloads
+- **Tech Stack**: Ruby, Git, LLM APIs
+- **Description**: High-fidelity evaluation engine that benchmarks AI agent skills. Runs agents in isolated Git sandboxes twice (baseline vs. with skills) and scores differences across 5 dimensions using a blind LLM judge.
+
+### brigid
+- **GitHub**: https://github.com/igmarin/brigid
+- **Role**: Creator / Lead Maintainer
+- **Language**: Rust
+- **Traction**: 169 brigid-core crate downloads
+- **Tech Stack**: Rust, LLM APIs
+- **Description**: Memory-safe Rust CLI that ingests any codebase and generates beginner-friendly, LLM-driven tutorials.
+
+### rs-guard
+- **GitHub**: https://github.com/nebulaideas/rs-guard
+- **Role**: Creator / Lead Maintainer
+- **Language**: Rust
+- **Traction**: 242 rs-guard crate downloads
+- **Tech Stack**: Rust, LLM APIs
+- **Description**: Multi-provider AI code-review CLI. Supports DeepSeek, Qwen, OpenRouter, and more.
+
+### elixir-phoenix-skills
+- **GitHub**: https://github.com/igmarin/elixir-phoenix-skills
+- **Role**: Creator / Lead Maintainer
+- **Language**: Elixir
+- **Traction**: 47 agent skills for idiomatic Phoenix, LiveView, and Ecto development
+- **Tech Stack**: Elixir, Phoenix, LiveView
+- **Description**: Curated agent skill library that teaches AI coding assistants idiomatic Phoenix, LiveView, and Ecto patterns.
