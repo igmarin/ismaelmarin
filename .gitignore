@@ -1,4 +1,5 @@
 .DS_Store
+codegraph.html
 .antigravitycli/
 node_modules/*
 .wrangler/*
