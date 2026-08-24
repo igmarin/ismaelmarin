@@ -35,7 +35,6 @@ Open any HTML file directly in a browser:
 ```bash
 open public/index.html
 ```
-
 Or serve with any static file server:
 
 ```bash
