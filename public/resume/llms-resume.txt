@@ -1,102 +1,48 @@
-# Ismael Marin — Staff Software Engineer & AI Engineer (Resume)
+# Ismael Marin — Software Engineer & Tech Lead (Résumé)
 
-> This document is optimized for LLMs, AI agents, and automated Applicant Tracking Systems (ATS).
+## Contact
 
-## Contact Information
-
-- **Name**: Ismael Guillermo Marin Cabrera
-- **Location**: Leon, Guanajuato, Mexico (Available for remote global roles)
-- **Email**: ismael.marin@gmail.com
-- **Phone**: +52 477 792 9000
-- **Main Portfolio**: https://ismaelmarin.dev
-- **HTML Resume**: https://ismaelmarin.dev/resume/
-- **LinkedIn**: https://linkedin.com/in/ismaelmarin
-- **GitHub**: https://github.com/igmarin
-- **Scheduler**: https://cal.com/ismael-marin/lets-talk
+- Public name: Ismael Marin
+- Full name: Ismael Guillermo Marín Cabrera
+- Other name variants: Ismael Guillermo Marin Cabrera; Ismael Guillermo Marin; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín
+- Location: León, Guanajuato, Mexico; available for remote work
+- Email: ismael.marin@gmail.com
+- Phone: +52 477 792 9000
+- Portfolio: https://ismaelmarin.dev/
+- HTML résumé: https://ismaelmarin.dev/resume/
+- PDF résumé: https://ismaelmarin.dev/resume/ismael-marin-resume.pdf
+- GitHub: https://github.com/igmarin
+- LinkedIn: https://www.linkedin.com/in/ismaelmarin/
+- Schedule a call: https://cal.com/ismael-marin/lets-talk
+- Availability: full-time, part-time, and contract opportunities
 
 ## Summary
 
-Staff Software Engineer with 20 years of remote software development experience. Ships production AI tooling across Ruby (Rails), Elixir/Phoenix, and Rust — MCP servers, context bridges, evaluation sandboxes, and memory-safe CLIs. Open-source traction includes 5,846 rails-ai-bridge and 1,734 ruby-skill-bench RubyGems downloads, 169 brigid-core and 242 rs-guard crate downloads, and 47 Elixir/Phoenix agent skills. Host of the syndicated bi-weekly AI radio segment and podcast "De Mentes Aumentadas."
+Software engineer and technical leader with experience building backend systems, SaaS products, integrations, and engineering teams for U.S. and Latin American companies. Ruby on Rails is the deepest production ecosystem; recent work also includes Rust, Elixir/Phoenix, and Python. Remains hands-on with architecture and implementation.
 
----
+## Skills
 
-## Technical Skills
+- Backend: Ruby on Rails, Rust, Elixir/Phoenix, Python, Hanami, PostgreSQL, Redis, Docker, AWS, APIs, and system architecture.
+- AI and developer tools: MCP, Rails context and read-only introspection, LLM integration, agent evaluation.
+- Leadership: engineering teams, ADRs/RFCs, mentoring, product planning, and TDD.
 
-### Core Backend & Infrastructure
-- **Languages**: Ruby, Elixir, Rust, SQL, HTML, CSS, JavaScript (Vanilla).
-- **Frameworks**: Ruby on Rails (v1 to v8 monoliths and APIs), Hanami (dry-rb, ROM patterns), Sinatra.
-- **Data & Ops**: PostgreSQL, Redis, Docker, Cloudflare Pages/Workers, Vercel, AWS (EC2, S3, RDS), Snyk (Security audits).
-- **Architecture**: Domain-Driven Design (DDD), Clean Architecture, Spec-Driven Design, TDD/BDD (RSpec, Minitest), Architecture Decision Records (ADRs).
+## Experience
 
-### AI Engineering & Developer Experience (DX)
-- **Protocols**: Model Context Protocol (MCP) server implementation and custom integrations.
-- **Orchestration**: ReAct loops, LLM tool-calling, agentic pipelines, LangGraph, prompt engineering.
-- **DX Tooling**: Executable AI skills, Tessl library authoring, blind LLM judging and skill evaluation frameworks.
-- **Pair Programming**: Claude Code, Cursor, Windsurf, GitHub Copilot.
+### Nebula Ideas — Head of Strategy / Technical Advisor (2010–present)
 
----
+Advises startups and product teams on architecture, backend modernization, AI adoption, technical strategy, and product development while remaining hands-on. Builds and modernizes Rails products, APIs, e-commerce systems, and AI developer tools.
 
-## Professional Experience
+### Dealerware — Software Engineer → Senior Software Engineer → Tech Lead (May 2022–April 2026)
 
-### Software Technical Lead / Senior Software Engineer — Dealerware (Remote)
-**Period**: May 2022 — April 2026
-- **Career Progression**: Contracted initially via 3Pillar Global; hired directly due to high performance; promoted from Mid-level to Senior, and subsequently to Software Technical Lead.
-- **Squad Leadership**: Led cross-functional engineering squads, establishing technical directions, mentoring engineers, and coordinating sprint deliverables.
-- **Monolith Scaling**: Owned and scaled core backend monolith and microservices, managing up to 10k+ peak transactions/hour with over 370 merged pull requests.
-- **Architectural Specs**: Authored over 40+ system architecture specifications and Architecture Decision Records (ADRs) to standardize database schemas, background workers, and API versions.
+- Worked on distributed systems processing approximately 10,000 telematics events per minute and integrations supporting vehicle lifecycle and daily operations.
+- Architected Auth0-based identity and SSO integrations and role-aware analytics integrations with Databricks and ThoughtSpot.
+- Led a zero-downtime Elasticsearch-to-OpenSearch migration that reduced infrastructure cost while preserving availability.
+- Authored 40+ ADRs/RFCs and contributed 370+ merged pull requests across 20+ production repositories.
 
-### Principal Remote Consultant & Tech Lead (NDA Restricted)
-**Period**: 2006 — Present
-- **Rails Monoliths**: Architected, updated, and scaled complex, high-throughput Ruby on Rails monoliths and APIs for diverse enterprise clients.
-- **High-Performance Rust**: Designed and compiled low-level high-performance tools in Rust for async operations and memory-safe runtimes (Tokio).
-- **Security & Quality**: Led remote developer teams, enforcing coding guidelines, automated testing (TDD/RSpec), and automated security audits (Snyk).
-- **AI Agent Tooling**: Dedicated transition periods to maintaining 7 active open-source AI agent tooling and context protocol (MCP) repositories.
+Career and Dealerware figures are documented in the PDF résumé linked above.
 
-### AI Radio Cohost / Tech Evangelist — De Mentes Aumentadas (FM Radio & Spotify)
-**Period**: 2025 — Present
-- **Radio Broadcasts**: Hosts a syndicated bi-weekly radio segment explaining artificial intelligence, data privacy, and agentic workflows to the public.
-- **Digital Evagelism**: Syndicates radio recordings as a Spotify podcast, driving thought leadership and technology adoption in the Spanish-speaking community.
+## Selected open-source work
 
----
-
-## Featured Open Source Projects
-
-### rails-ai-bridge
-- **GitHub**: https://github.com/igmarin/rails-ai-bridge
-- **Role**: Creator / Lead Maintainer
-- **Language**: Ruby
-- **Traction**: 5,846 RubyGems downloads
-- **Tech Stack**: Ruby on Rails, Model Context Protocol
-- **Description**: Turn any Rails app into an AI-ready codebase. Generates project context files (CLAUDE.md, AGENTS.md, Cursor rules) and spins up a live MCP server for real-time Rails codebase introspection.
-
-### ruby-skill-bench
-- **GitHub**: https://github.com/igmarin/ruby-skill-bench
-- **Role**: Creator / Lead Maintainer
-- **Language**: Ruby
-- **Traction**: 1,734 RubyGems downloads
-- **Tech Stack**: Ruby, Git, LLM APIs
-- **Description**: High-fidelity evaluation engine that benchmarks AI agent skills. Runs agents in isolated Git sandboxes twice (baseline vs. with skills) and scores differences across 5 dimensions using a blind LLM judge.
-
-### brigid
-- **GitHub**: https://github.com/igmarin/brigid
-- **Role**: Creator / Lead Maintainer
-- **Language**: Rust
-- **Traction**: 169 brigid-core crate downloads
-- **Tech Stack**: Rust, LLM APIs
-- **Description**: Memory-safe Rust CLI that ingests any codebase and generates beginner-friendly, LLM-driven tutorials.
-
-### rs-guard
-- **GitHub**: https://github.com/nebulaideas/rs-guard
-- **Role**: Creator / Lead Maintainer
-- **Language**: Rust
-- **Traction**: 242 rs-guard crate downloads
-- **Tech Stack**: Rust, LLM APIs
-- **Description**: Multi-provider AI code-review CLI. Supports DeepSeek, Qwen, OpenRouter, and more.
-
-### elixir-phoenix-skills
-- **GitHub**: https://github.com/igmarin/elixir-phoenix-skills
-- **Role**: Creator / Lead Maintainer
-- **Language**: Elixir
-- **Traction**: 47 agent skills for idiomatic Phoenix, LiveView, and Ecto development
-- **Tech Stack**: Elixir, Phoenix, LiveView
-- **Description**: Curated agent skill library that teaches AI coding assistants idiomatic Phoenix, LiveView, and Ecto patterns.
+- rails-ai-bridge: Rails context and read-only MCP introspection. https://github.com/igmarin/rails-ai-bridge — more than 10,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/rails-ai-bridge
+- ruby-skill-bench: Isolated agent comparisons with and without added context, assessed through blind judging. https://github.com/igmarin/ruby-skill-bench — more than 3,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/ruby-skill-bench
+- agent-mcp-runtime: Rust CLI for managing MCP connections and LLM tool-calling loops. https://github.com/igmarin/agent-mcp-runtime

@@ -1,101 +1,35 @@
-# Ismael Marin — Staff Software Engineer & AI Engineer
+# Ismael Marin — Software Engineer & Tech Lead
 
-> Staff Software Engineer with 20 years of remote software development experience. Ships production AI tooling across Ruby (Rails), Elixir/Phoenix, and Rust — MCP servers, context bridges, evaluation sandboxes, and memory-safe CLIs. Based in Leon, Mexico.
+Ismael Marin builds backend systems, developer tools, and AI infrastructure. Ruby on Rails is his deepest production experience. He also works with Rust, Elixir/Phoenix, and Python. He is based in León, Mexico and is open to remote full-time, part-time, and contract opportunities.
 
-## Person
+## Identity and contact
 
-- **Name**: Ismael Guillermo Marin Cabrera (Ismael G. Marin, Ismael Marin, Ismael Marin Cabrera)
-- **Role**: Tech Lead, Staff Software Engineer, AI Engineer, Ruby on Rails, Ruby Engineer
-- **Experience**: 20 years building software — all remote
-- **Focus**: Ruby on Rails, Elixir/Phoenix, and Rust — building AI/MCP tooling, evals, and high-throughput backends
-- **Location**: Leon, Mexico
-- **Email**: ismael.marin@gmail.com
-- **Phone**: +52 477 792 9000
-- **Scheduler**: https://cal.com/ismael-marin/lets-talk
-- **Website**: https://ismaelmarin.dev
-- **Resume**: https://ismaelmarin.dev/resume/
+- Public name: Ismael Marin
+- Full name: Ismael Guillermo Marín Cabrera
+- Other name variants: Ismael Guillermo Marin Cabrera; Ismael Guillermo Marin; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín
+- Email: ismael.marin@gmail.com
+- Portfolio: https://ismaelmarin.dev/
+- Résumé: https://ismaelmarin.dev/resume/
+- PDF résumé: https://ismaelmarin.dev/resume/ismael-marin-resume.pdf
+- GitHub: https://github.com/igmarin
+- LinkedIn: https://www.linkedin.com/in/ismaelmarin/
+- Schedule a call: https://cal.com/ismael-marin/lets-talk
 
-## Open Source Projects
+## Experience
 
-### rails-ai-bridge (Ruby)
-- **GitHub**: https://github.com/igmarin/rails-ai-bridge
-- **RubyGems**: https://rubygems.org/gems/rails-ai-bridge
-- **Traction**: 5,846 RubyGems downloads
-- **Description**: Turn any Rails app into an AI-ready codebase — one command, zero config. Generates static context files (CLAUDE.md, AGENTS.md, .cursorrules, copilot-instructions.md) and runs a live MCP server for real-time Rails introspection.
+- Nebula Ideas, Head of Strategy / Technical Advisor (2010–present): Advises product teams on architecture, backend modernization, AI adoption, and product development while remaining hands-on with implementation.
+- Dealerware, Software Engineer → Senior Software Engineer → Tech Lead (May 2022–April 2026): Worked on distributed systems processing approximately 10,000 telematics events per minute. Led a zero-downtime Elasticsearch-to-OpenSearch migration, authored 40+ ADRs/RFCs, and contributed 370+ merged pull requests across 20+ production repositories.
 
-### ruby-skill-bench (Ruby)
-- **GitHub**: https://github.com/igmarin/ruby-skill-bench
-- **RubyGems**: https://rubygems.org/gems/ruby-skill-bench
-- **Traction**: 1,734 RubyGems downloads
-- **Description**: High-fidelity evaluation engine for benchmarking AI agent skills. Runs an agent twice (baseline vs. with skill), then uses a blind LLM judge to score both outputs across 5 dimensions. The difference is the skill's measurable ROI.
+Career and Dealerware figures come from the PDF résumé linked above.
 
-### rails-agent-skills (Ruby)
-- **GitHub**: https://github.com/igmarin/rails-agent-skills
-- **Traction**: 22 GitHub stars
-- **Description**: Curated AI agent skill library for Ruby on Rails development. 28 Rails skills and 9 workflows teaching AI coding tools how to plan, test, implement, document, and review Rails work using production-minded conventions. Tests gate implementation.
+## Selected open-source work
 
-### brigid (Rust)
-- **GitHub**: https://github.com/igmarin/brigid
-- **Crates.io**: https://crates.io/crates/brigid-core
-- **Traction**: 169 `brigid-core` crate downloads
-- **Description**: A memory-safe Rust CLI that ingests any codebase and generates beginner-friendly, LLM-driven tutorials.
+- rails-ai-bridge: Rails context files and read-only MCP introspection for AI coding assistants. https://github.com/igmarin/rails-ai-bridge — more than 10,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/rails-ai-bridge
+- ruby-skill-bench: Compares AI agent runs with and without added context in isolated Git workspaces, using blind judging. https://github.com/igmarin/ruby-skill-bench — more than 3,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/ruby-skill-bench
+- brigid: Rust CLI for guided codebase tutorials. https://github.com/igmarin/brigid
+- elixir-phoenix-skills: Guidance for AI coding assistants working with Phoenix, LiveView, and Ecto. https://github.com/igmarin/elixir-phoenix-skills
 
-### rs-guard (Rust)
-- **GitHub**: https://github.com/nebulaideas/rs-guard
-- **Crates.io**: https://crates.io/crates/rs-guard
-- **Traction**: 242 `rs-guard` crate downloads
-- **Description**: Fast, multi-provider AI code-review CLI. Supports DeepSeek, Qwen, OpenRouter, and more.
+## Writing and media
 
-### elixir-phoenix-skills (Elixir)
-- **GitHub**: https://github.com/igmarin/elixir-phoenix-skills
-- **Traction**: 47 agent skills for idiomatic Phoenix, LiveView, and Ecto development
-- **Description**: Curated AI agent skill library for idiomatic Elixir/Phoenix/LiveView/Ecto development.
-
-### ruby-core-skills (Ruby)
-- **GitHub**: https://github.com/igmarin/ruby-core-skills
-- **Description**: Core Ruby skills for AI agent evaluation. A structured library of language fundamentals and idiomatic patterns that AI agents are tested against.
-
-### hanakai-yaku (Ruby/Hanami)
-- **GitHub**: https://github.com/igmarin/hanakai-yaku
-- **Description**: Curated library of atomic development skills and orchestrated agents for AI coding assistants, enforcing TDD and DDD discipline for Hanami 2.x Ruby applications.
-
-### agnostic-planning-skills (Framework-agnostic)
-- **GitHub**: https://github.com/igmarin/agnostic-planning-skills
-- **Description**: Framework-agnostic AI planning capabilities. Enforces PM and software engineering planning discipline with structured templates for PRDs and task estimation.
-
-## Services
-
-- **AI Integration & Tooling**: Integrate LLMs into existing Rails monoliths, build MCP servers, setup agent-based workflows
-- **Staff Augmentation**: Staff/Lead level feature development, driving complex technical initiatives from PRD to production
-- **Architecture Consulting**: System design, performance optimization, ADR authoring for scaling Ruby on Rails applications
-
-## Tech Stack
-
-- **Core**: Ruby on Rails, Elixir/Phoenix, PostgreSQL, Redis, Rust, Docker, AWS, Cloudflare, Vercel
-- **AI & Tooling**: Claude (Anthropic), Gemini, DeepSeek, OpenAI Codex, MCP, Cursor, GitHub Copilot
-- **Architecture**: Domain-Driven Design, TDD / RSpec, GraphQL, Agentic AI Systems
-
-## Writing
-
-Articles on Medium covering Rails, AI engineering, and software architecture:
-
-- [How I Built a Composable AI Skill Ecosystem for Ruby with Help from 4 Different AI Agents](https://medium.com/@igmarin/how-i-built-a-composable-ai-skill-ecosystem-for-ruby-with-help-from-4-different-ai-agents-009d72a9d179)
-- [Your JSON Column Is Not a Settings System](https://medium.com/@igmarin/your-json-column-is-not-a-settings-system-4b7dc46e747f)
-- [The Engineer Who Understands the Product Will Always Win](https://medium.com/@igmarin/the-engineer-who-understands-the-product-will-always-win-1b073585915c)
-- [Beyond Vibe Coding: How rails-ai-bridge Achieved "Semantic Parity"](https://medium.com/@igmarin/beyond-vibe-coding-how-rails-ai-bridge-v2-2-0-6e970d2cfd55)
-- [Stop "Vibe Coding": How I Bridged the Gap Between Rails and AI](https://medium.com/@igmarin/stop-vibe-coding-how-i-bridged-the-gap-between-rails-and-ai-063eaf0a0304)
-
-## Media & Thought Leadership
-
-- **De Mentes Aumentadas (Augmented Minds)**: Syndicated bi-weekly AI and technology segment broadcasted on national FM radio and distributed globally as a Spotify podcast (in Spanish 🇪🇸). Discusses agentic workflows, big data synchronization, privacy mechanics, and tech ethics.
-  - Spotify Show: https://open.spotify.com/show/1heMVnJeTE32SFUNzOWdFe
-  - Featured Episode: "¿Nos escucha el celular? (Is our cellphone listening to us?)" (https://open.spotify.com/episode/22tL5m5SVRQd5mHObFJ819) — detailing the mechanics of cookie synchronization, track networks, and predictive machine learning models vs. active audio wiretapping.
-
-## Profiles
-
-- **LinkedIn**: https://linkedin.com/in/ismaelmarin
-- **GitHub**: https://github.com/igmarin
-- **Medium**: https://medium.com/@igmarin
-- **RubyGems**: https://rubygems.org/profiles/igmarin
-- **GitLab**: https://gitlab.com/igmarin
-- **Spotify Show**: https://open.spotify.com/show/1heMVnJeTE32SFUNzOWdFe
+- Article: "Your JSON Column Is Not a Settings System" — https://medium.com/@igmarin/your-json-column-is-not-a-settings-system-4b7dc46e747f
+- De Mentes Aumentadas: Spanish-language radio segment and podcast about AI and technology — https://open.spotify.com/show/1heMVnJeTE32SFUNzOWdFe

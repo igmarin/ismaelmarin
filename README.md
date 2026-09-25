@@ -1,14 +1,14 @@
 # ismaelmarin.dev
 
-Personal portfolio site for Ismael Marin — Tech Lead & AI Engineer.
+Personal portfolio for Ismael Marin, software engineer and tech lead.
 
-Built with plain HTML & CSS, deployed to Cloudflare Pages.
+Built with plain HTML, CSS, and JavaScript; deployed to Cloudflare Pages.
 
 ## Structure
 
 ```
 public/
-├── index.html                    # Main homepage (stich_design)
+├── index.html                    # Main homepage
 ├── design.css                    # Design system stylesheet
 ├── elements.js                   # Interactive components (terminal, mobile menu, etc.)
 ├── llms.txt                      # AI-crawler description
@@ -20,22 +20,13 @@ public/
     └── llms-resume.txt           # Resume AI-crawler description
 ```
 
-## Design System
+## Design
 
-The site uses a custom design system (stich_design) featuring:
-- **Modern Technical Minimalism** with Glassmorphism and Terminal-inspired accents
-- **Dark-first interface** with Deep Space Navy foundation
-- **Typography**: DM Serif Display (headlines) + DM Mono (body/technical)
-- **Components**: Interactive terminal widget, glass project cards, spotlight glow effects
+The site uses a dark layout, DM Serif Display and DM Mono, project cards, and an interactive terminal. Styles live in `public/design.css`; terminal and mobile menu behavior lives in `public/elements.js`.
 
 ## Local preview
 
-Open any HTML file directly in a browser:
-
-```bash
-open public/index.html
-```
-Or serve with any static file server:
+Serve the `public` directory locally so root-relative links work:
 
 ```bash
 python3 -m http.server 8000 --directory public
@@ -51,8 +42,9 @@ wrangler pages deploy public
 
 ## Domain
 
-- **Production**: https://ismaelmarin.dev
-- **Sub-sites**:
-  - https://ismaelmarin.dev/ruby-skill-bench/
-  - https://ismaelmarin.dev/rails-ai-bridge-site/
-  - https://ismaelmarin.dev/rails-agent-skills-site/
+- Portfolio: https://ismaelmarin.dev/
+- Résumé: https://ismaelmarin.dev/resume/
+
+The PDF résumé in `public/resume/` is the source for career dates and Dealerware figures. RubyGems download thresholds in the site copy were checked on 2026-09-25 UTC and link to their package pages.
+
+Legacy project page paths redirect to their current GitHub Pages versions via `public/_redirects`.
