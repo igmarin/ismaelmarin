@@ -1,17 +1,22 @@
-# Ismael Marin — Staff Software Engineer & AI Engineer
+# Ismael Marin — Software Engineer & Tech Lead
 
-> Tech Lead and Staff Software Engineer with 20 years of remote software development experience. Specialized in scaling Ruby on Rails monoliths, architecting high-performance systems in Rust, and building developer-centric Agentic AI integrations & Model Context Protocol (MCP) infrastructure. Based in Leon, Mexico.
+> Software engineer and technical leader with deep experience building backend systems, SaaS products, integrations, and engineering teams for U.S. and Latin American companies. Ruby on Rails is my deepest production ecosystem, while I now work regularly with Rust, Elixir/Phoenix, and Python, particularly around developer infrastructure and AI systems. Open to full-time, part-time, and contract opportunities.
 
 ## Person
 
-- **Name**: Ismael Guillermo Marin Cabrera (Ismael G. Marin, Ismael Marin, Ismael Marin Cabrera)
-- **Role**: Tech Lead, Staff Software Engineer, AI Engineer, Ruby on Rails, Ruby Engineer
-- **Experience**: 20 years building software — all remote
-- **Focus**: Ruby on Rails + AI tooling — bridging backend Rails monoliths with agentic AI/MCP systems
+- **Name**: Ismael Marin
+- **Alternate names**: Ismael Guillermo Marín Cabrera; Ismael Guillermo Marin Cabrera; Ismael Guillermo Marin; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín
+- **Role**: Software Engineer, Tech Lead, Ruby on Rails, AI Engineering, Backend Architecture
+- **Focus**: Ruby on Rails, Rust, Elixir/Phoenix, Python, developer infrastructure, and AI systems
 - **Location**: Leon, Mexico
 - **Email**: ismael.marin@gmail.com
 - **Phone**: +52 477 792 9000
 - **Scheduler**: https://cal.com/ismael-guillermo-marin-ot9aet
+
+## Selected production work
+
+- **Dealerware (May 2022–April 2026)**: Worked on distributed systems processing approximately 10,000 telematics events per minute; authored 40+ ADRs/RFCs; contributed 370+ merged pull requests across 20+ production repositories; and led a zero-downtime Elasticsearch-to-OpenSearch migration that materially reduced infrastructure cost while preserving production availability.
+- **Nebula Ideas (2010–Present)**: Advise startups and product teams on architecture, backend modernization, AI adoption, technical strategy, and product development while remaining hands-on with implementation.
 
 ## Open Source Projects
 
@@ -19,13 +24,13 @@
 - **URL**: https://ismaelmarin.dev/ruby-skill-bench/
 - **GitHub**: https://github.com/igmarin/ruby-skill-bench
 - **RubyGems**: https://rubygems.org/gems/ruby-skill-bench
-- **Description**: High-fidelity evaluation engine for benchmarking AI agent skills. Runs an agent twice (baseline vs. with skill), then uses a blind LLM judge to score both outputs across 5 dimensions. The difference is the skill's measurable ROI.
+- **Description**: Evaluation framework for measuring whether engineering skills and additional context improve AI-agent performance using isolated runs, baseline-versus-context comparison, and blind judging. RubyGems recorded more than 3,000 total downloads as of 2026-09-25 UTC.
 
 ### rails-ai-bridge
 - **URL**: https://ismaelmarin.dev/rails-ai-bridge-site/
 - **GitHub**: https://github.com/igmarin/rails-ai-bridge
 - **RubyGems**: https://rubygems.org/gems/rails-ai-bridge
-- **Description**: Turn any Rails app into an AI-ready codebase — one command, zero config. Generates static context files (CLAUDE.md, AGENTS.md, .cursorrules, copilot-instructions.md) and runs a live MCP server for real-time Rails introspection.
+- **Description**: MCP and context infrastructure that lets AI coding assistants understand real Rails applications through generated project context and read-only introspection. RubyGems recorded more than 10,000 total downloads as of 2026-09-25 UTC.
 
 ### rails-agent-skills
 - **URL**: https://ismaelmarin.dev/rails-agent-skills-site/

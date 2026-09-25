@@ -1,10 +1,11 @@
-# Ismael Marin — Staff Software Engineer & AI Engineer (Resume)
+# Ismael Marin — Software Engineer & Tech Lead (Résumé)
 
 > This document is optimized for LLMs, AI agents, and automated Applicant Tracking Systems (ATS).
 
 ## Contact Information
 
-- **Name**: Ismael Guillermo Marin Cabrera
+- **Name**: Ismael Marin
+- **Alternate names**: Ismael Guillermo Marín Cabrera; Ismael Guillermo Marin Cabrera; Ismael Guillermo Marin; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín
 - **Location**: Leon, Guanajuato, Mexico (Available for remote global roles)
 - **Email**: ismael.marin@gmail.com
 - **Phone**: +52 477 792 9000
@@ -16,7 +17,7 @@
 
 ## Summary
 
-Tech Lead and Staff Software Engineer with 20 years of remote software development experience. Specialized in scaling enterprise Ruby on Rails monoliths, writing high-performance systems utilities in Rust, and constructing developer-centric Agentic AI integrations & Model Context Protocol (MCP) systems. Host of the syndicated bi-weekly AI radio segment and podcast "De Mentes Aumentadas."
+Software engineer and technical leader with deep experience building backend systems, SaaS products, integrations, and engineering teams for U.S. and Latin American companies. Ruby on Rails is my deepest production ecosystem, while I now work regularly with Rust, Elixir/Phoenix, and Python, particularly around developer infrastructure and AI systems. I approach AI as a software engineering problem: clear specifications, useful context, tests, guardrails, and evals. I have worked remotely throughout my career and remain hands-on with architecture and implementation.
 
 ---
 
@@ -38,20 +39,18 @@ Tech Lead and Staff Software Engineer with 20 years of remote software developme
 
 ## Professional Experience
 
-### Staff Software Engineer / Tech Lead (Remote)
-**Period**: 2006 — Present
-- **Monolith Scaling**: Maintained and scaled enterprise Rails monoliths, optimizing database queries and caching layers to operate up to 10k+ peak transactions/hour.
-- **Architectural Specs**: Authored 40+ system architecture specifications and Architecture Decision Records (ADRs) to align technical teams on database migrations, dependency updates, and API versions.
-- **High-Performance Rust Tooling**: Designed and built safe Rust command-line tools for concurrent async tasks using Tokio.
-- **Security & Quality**: Maintained rigorous code quality gates using automated testing suites (TDD first) and security tools (Snyk) to reduce production bugs by over 40%.
+### Nebula Ideas — Head of Strategy / Technical Advisor (Remote)
+**Period**: 2010 — Present
+- Advise startups and product teams on architecture, backend modernization, AI adoption, technical strategy, and product development while remaining hands-on with implementation.
+- Build and modernize Ruby on Rails products, infrastructure, APIs, and e-commerce systems; help founders define MVP scope, technical priorities, and architecture appropriate to product stage.
+- Develop AI engineering and developer tooling across Ruby, Rust, Elixir, and Python.
 
-### AI Radio Cohost / Tech Evangelist
-**Podcast/Show**: De Mentes Aumentadas (FM Radio & Spotify)
-**Period**: 2025 — Present
-- Hosts a syndicated bi-weekly segment discussing AI, LLMs, databrokers, Big Data synchronization, and digital privacy.
-- Translates bleeding-edge artificial intelligence systems concepts into public Spanish-language mass-media broadcasts and podcasts.
-
----
+### Dealerware — Software Engineer → Senior Software Engineer → Tech Lead (Remote)
+**Period**: May 2022 — April 2026
+- Worked on distributed systems processing approximately 10,000 telematics events per minute and integrations supporting vehicle lifecycle and daily operational workflows.
+- Architected Auth0-based enterprise identity and SSO integrations, plus role-aware analytics integrations with Databricks and ThoughtSpot.
+- Led a zero-downtime Elasticsearch-to-OpenSearch migration that materially reduced infrastructure cost while preserving production availability.
+- Authored 40+ ADRs/RFCs and contributed 370+ merged pull requests across 20+ production repositories.
 
 ## Featured Open Source Projects
 
@@ -59,13 +58,13 @@ Tech Lead and Staff Software Engineer with 20 years of remote software developme
 - **GitHub**: https://github.com/igmarin/ruby-skill-bench
 - **Role**: Creator / Lead Maintainer
 - **Tech Stack**: Ruby, Git, LLM APIs
-- **Description**: High-fidelity evaluation engine that benchmarks AI agent skills. Runs agents in isolated Git sandboxes twice (baseline vs. with skills) and scores differences across 5 dimensions using a blind LLM judge.
+- **Description**: Evaluation framework for measuring whether engineering skills and additional context improve AI-agent performance using isolated runs, baseline-versus-context comparison, and blind judging. More than 3,000 total RubyGems downloads as of 2026-09-25 UTC.
 
 ### rails-ai-bridge
 - **GitHub**: https://github.com/igmarin/rails-ai-bridge
 - **Role**: Creator / Lead Maintainer
 - **Tech Stack**: Ruby on Rails, Model Context Protocol
-- **Description**: Turn any Rails app into an AI-ready codebase. Generates project context files (CLAUDE.md, AGENTS.md, Cursor rules) and spins up a live MCP server for real-time Rails codebase introspection.
+- **Description**: MCP and context infrastructure that lets AI coding assistants understand real Rails applications through generated project context and read-only introspection. More than 10,000 total RubyGems downloads as of 2026-09-25 UTC.
 
 ### agent-mcp-runtime
 - **GitHub**: https://github.com/igmarin/agent-mcp-runtime

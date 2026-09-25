@@ -10,21 +10,21 @@ app.get('/', (c) => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Ismael G Marin Cabrera</title>
+      <title>Ismael Marin — Software Engineer & Tech Lead</title>
       <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-gray-900 text-gray-100 min-h-screen font-sans">
       <div class="max-w-2xl mx-auto px-6 py-16">
         <!-- Hero -->
         <header class="mb-12">
-          <h1 class="text-4xl font-bold text-amber-400 mb-2">Ismael G Marin Cabrera</h1>
-          <p class="text-xl text-gray-400">Tech Lead & Senior Software Engineer</p>
+          <h1 class="text-4xl font-bold text-amber-400 mb-2">Ismael Marin</h1>
+          <p class="text-xl text-gray-400">Software Engineer & Tech Lead</p>
         </header>
 
         <!-- Bio -->
         <section class="mb-12">
           <p class="text-lg leading-relaxed text-gray-300 mb-4">
-            I'm a cross-functional Tech Lead and Senior Software Engineer with 15 years of experience building software — all remote. I've grown alongside Ruby on Rails through every major evolution of the framework, and for the last 10 years I've been focused on scalable backend systems for US and LATAM SaaS companies.
+            Software engineer and technical leader with deep experience building backend systems, SaaS products, integrations, and engineering teams for U.S. and Latin American companies. Ruby on Rails is my deepest production ecosystem, while I now work regularly with Rust, Elixir/Phoenix, and Python around developer infrastructure and AI systems.
           </p>
         </section>
 
@@ -59,7 +59,7 @@ app.get('/', (c) => {
 
         <!-- Footer -->
         <footer class="text-sm text-gray-600">
-          <p>&copy; ${new Date().getFullYear()} Ismael G Marin Cabrera</p>
+          <p>&copy; ${new Date().getFullYear()} Ismael Marin</p>
         </footer>
       </div>
     </body>
