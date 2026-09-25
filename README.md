@@ -10,6 +10,7 @@ Built with plain HTML, CSS, and JavaScript; deployed to Cloudflare Pages.
 public/
 ├── index.html                    # Main homepage
 ├── design.css                    # Design system stylesheet
+├── favicon.svg                   # Site icon
 ├── elements.js                   # Interactive components (terminal, mobile menu, etc.)
 ├── llms.txt                      # AI-crawler description
 ├── sitemap.xml                   # SEO sitemap
