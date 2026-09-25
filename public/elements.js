@@ -1,5 +1,5 @@
 /**
- * Ismael Marín - Elements Interactivity & Logic (elements.js)
+ * Ismael Marin - Elements Interactivity & Logic (elements.js)
  */
 
 (function() {
@@ -61,7 +61,7 @@ function initMobileMenu() {
         drawerFooter.style.marginTop = 'auto';
         drawerFooter.style.fontSize = '0.75rem';
         drawerFooter.style.color = 'var(--color-text-muted)';
-        drawerFooter.innerText = '© 2026 Ismael Marín';
+        drawerFooter.innerText = '© 2026 Ismael Marin';
         drawer.appendChild(drawerFooter);
 
         document.body.appendChild(drawer);
@@ -119,30 +119,30 @@ function initTerminalWidget() {
                       '  <span class="text-primary">clear</span>     - Clear shell terminal screen');
         },
         about: () => {
-            printLine('<span class="text-text-primary">Ismael Marín</span><br>' +
-                      'Role: Staff Engineering Lead & AI Infrastructure Creator<br>' +
-                      'Experience: 20+ years of high-performance architecture<br>' +
-                      'Location: Remote / Global');
+            printLine('<span class="text-text-primary">Ismael Marin</span><br>' +
+                      'Role: Software Engineer & Tech Lead<br>' +
+                      'Focus: Backend systems, developer tools, AI engineering<br>' +
+                      'Location: León, Mexico / Remote');
         },
         projects: () => {
             printLine('Selected Projects:<br>' +
-                      '  * <span class="text-primary">Rails AI Bridge</span> - Zero-config MCP server for Rails (5,846 downloads).<br>' +
-                      '  * <span class="text-tertiary">Ruby Skill Bench</span> - Benchmarking the ROI of context for AI agents (1,734 downloads).<br>' +
-                      '  * <span class="text-secondary">Brigid</span> - Rust CLI that turns codebases into LLM tutorials (169 downloads).<br>' +
-                      '  * <span class="text-secondary">Elixir Phoenix Skills</span> - 47 agent skills for Phoenix/LiveView/Ecto.');
+                      '  * <span class="text-primary">Rails AI Bridge</span> - Rails context and read-only MCP introspection.<br>' +
+                      '  * <span class="text-tertiary">Ruby Skill Bench</span> - Evaluate the effect of added agent context.<br>' +
+                      '  * <span class="text-secondary">Brigid</span> - Rust CLI for guided codebase tutorials.<br>' +
+                      '  * <span class="text-secondary">Elixir Phoenix Skills</span> - Guidance for Phoenix, LiveView, and Ecto.');
         },
         skills: () => {
-            printLine('Technical Stack Blueprint:<br>' +
-                      '  [Languages]  : Ruby (Mastery), Elixir/Phoenix, Rust<br>' +
-                      '  [Frameworks] : Rails (20 yrs), Phoenix, Hanami<br>' +
-                      '  [Systems]    : PostgreSQL, Kafka, Docker<br>' +
-                      '  [AI Infra]   : Agentic Arch, MCP, Vector DBs, Prompt Engineering, LLM APIs & Evals');
+            printLine('Technical stack:<br>' +
+                      '  [Languages]  : Ruby, Rust, Elixir, Python<br>' +
+                      '  [Frameworks] : Rails, Phoenix, Hanami<br>' +
+                      '  [Systems]    : PostgreSQL, Redis, Docker<br>' +
+                      '  [AI Tools]   : MCP, LLM integration, evals');
         },
         contact: () => {
-            printLine('Connectivity Protocol:<br>' +
+            printLine('Contact:<br>' +
                       '  GitHub   : <a href="https://github.com/igmarin" class="text-tertiary" target="_blank">github.com/igmarin</a><br>' +
                       '  LinkedIn : <a href="https://linkedin.com/in/ismaelmarin" class="text-tertiary" target="_blank">linkedin.com/in/ismaelmarin</a><br>' +
-                      '  Email    : <span class="text-primary">ismael.marin@gmail.com</span>');
+                      '  Email    : <a href="mailto:ismael.marin@gmail.com" class="text-primary">ismael.marin@gmail.com</a>');
         },
         clear: () => {
             terminalBody.innerHTML = '';
@@ -257,7 +257,7 @@ function initTerminalWidget() {
         { type: 'input', text: 'whoami' },
         { type: 'output', text: '> Ismael Marin' },
         { type: 'input', text: 'cat status.yml' },
-        { type: 'output', text: '# Core Attributes\nrole: "Staff Engineering Lead"\nfocus: ["Backend", "Software Engineering", "AI Implementation", "Best Practices"]\nexperience: "20+ years"\nlocation: "Remote / Global"' },
+        { type: 'output', text: '# Current work\nrole: "Software Engineer & Tech Lead"\nfocus: ["Backend systems", "Developer tools", "AI engineering"]\nopen_to: ["Full-time", "Part-time", "Contract"]' },
         { type: 'input', text: 'help' }
     ];
 
@@ -300,8 +300,17 @@ function initTerminalWidget() {
         }
     }
 
-    // Start intro sequence
-    setTimeout(runIntro, TIMING.START_DELAY);
+    // Show the same information immediately when the visitor prefers reduced motion.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        introCommands.forEach((item) => {
+            printLine(item.type === 'input'
+                ? `${getPromptHTML()} ${item.text}`
+                : item.text.replace(/\n/g, '<br>'));
+        });
+        setupPrompt();
+    } else {
+        setTimeout(runIntro, TIMING.START_DELAY);
+    }
 
     // Cleanup on page unload
     window.addEventListener('beforeunload', () => {

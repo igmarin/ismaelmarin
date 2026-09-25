@@ -128,6 +128,22 @@ a {
     text-decoration: none;
 }
 
+:where(a, button, input):focus-visible {
+    outline: 2px solid var(--color-primary) !important;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 /* --- Icon Size Utilities --- */
 .icon-xs {
     font-size: 14px;
@@ -867,6 +883,12 @@ a {
     gap: 0.5rem;
     color: var(--color-text-muted);
     font-size: 0.75rem;
+}
+
+.project-meta-item a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .project-link {
