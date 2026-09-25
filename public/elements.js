@@ -122,21 +122,25 @@ function initTerminalWidget() {
             printLine('<span class="text-text-primary">Ismael Marin</span><br>' +
                       'Role: Software Engineer & Tech Lead<br>' +
                       'Focus: Backend systems, developer tools, AI engineering<br>' +
-                      'Location: León, Mexico / Remote');
+                      'Location: León, Mexico · Remote<br>' +
+                      'Open to: Full-time, part-time, and contract work');
         },
         projects: () => {
             printLine('Selected Projects:<br>' +
                       '  * <span class="text-primary">Rails AI Bridge</span> - Rails context and read-only MCP introspection.<br>' +
                       '  * <span class="text-tertiary">Ruby Skill Bench</span> - Evaluate the effect of added agent context.<br>' +
                       '  * <span class="text-secondary">Brigid</span> - Rust CLI for guided codebase tutorials.<br>' +
+                      '  * <span class="text-secondary">rs-guard</span> - Multi-provider Rust code review; I contribute to the project.<br>' +
+                      '  * <span class="text-secondary">Rust Core Skills</span> - Rust guidance for ownership, types, errors, and Cargo TDD.<br>' +
+                      '  * <span class="text-secondary">pi-vida</span> - Language-specific agent setups with skills, safety gates, and ticket tracking.<br>' +
                       '  * <span class="text-secondary">Elixir Phoenix Skills</span> - Guidance for Phoenix, LiveView, and Ecto.');
         },
         skills: () => {
             printLine('Technical stack:<br>' +
                       '  [Languages]  : Ruby, Rust, Elixir, Python<br>' +
                       '  [Frameworks] : Rails, Phoenix, Hanami<br>' +
-                      '  [Systems]    : PostgreSQL, Redis, Docker<br>' +
-                      '  [AI Tools]   : MCP, LLM integration, evals');
+                      '  [Systems]    : PostgreSQL, Redis, OpenSearch, AWS, Docker<br>' +
+                      '  [AI Work]    : MCP, LLM integration, agent skills, evals');
         },
         contact: () => {
             printLine('Contact:<br>' +
@@ -150,6 +154,16 @@ function initTerminalWidget() {
         }
     };
 
+    function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, character => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[character]);
+    }
+
     function executeCommand(cmdStr) {
         const trimmed = cmdStr.trim();
         if (trimmed) {
@@ -158,7 +172,7 @@ function initTerminalWidget() {
         historyIndex = history.length;
 
         // Print input representation
-        printLine(`<span class="text-primary">welcome</span><span class="text-text-muted">@main</span> <span class="text-tertiary">$</span> ${trimmed}`);
+        printLine(`<span class="text-primary">welcome</span><span class="text-text-muted">@main</span> <span class="text-tertiary">$</span> ${escapeHTML(trimmed)}`);
         
         if (!trimmed) {
             setupPrompt();
@@ -169,7 +183,7 @@ function initTerminalWidget() {
         if (commands[cmd]) {
             commands[cmd]();
         } else {
-            printLine(`Command not found: "${trimmed}". Type <span class="text-primary">help</span> for options.`, 'error');
+            printLine(`Command not found: "${escapeHTML(trimmed)}". Type <span class="text-primary">help</span> for options.`, 'error');
         }
         setupPrompt();
     }

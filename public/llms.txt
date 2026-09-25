@@ -6,9 +6,10 @@ Ismael Marin builds backend systems, developer tools, and AI infrastructure. Rub
 
 - Public name: Ismael Marin
 - Full name: Ismael Guillermo Marín Cabrera
-- Other name variants: Ismael Guillermo Marin Cabrera; Ismael Guillermo Marin; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín
+- Other name variants: Ismael Guillermo Marin; Ismael Guillermo Marin Cabrera; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín; Ismael Marin
 - Email: ismael.marin@gmail.com
 - Portfolio: https://ismaelmarin.dev/
+- Portfolio bridge: https://igmarin.github.io/
 - Résumé: https://ismaelmarin.dev/resume/
 - PDF résumé: https://ismaelmarin.dev/resume/ismael-marin-resume.pdf
 - GitHub: https://github.com/igmarin
@@ -19,6 +20,7 @@ Ismael Marin builds backend systems, developer tools, and AI infrastructure. Rub
 
 - Nebula Ideas, Head of Strategy / Technical Advisor (2010–present): Advises product teams on architecture, backend modernization, AI adoption, and product development while remaining hands-on with implementation.
 - Dealerware, Software Engineer → Senior Software Engineer → Tech Lead (May 2022–April 2026): Worked on distributed systems processing approximately 10,000 telematics events per minute. Led a zero-downtime Elasticsearch-to-OpenSearch migration, authored 40+ ADRs/RFCs, and contributed 370+ merged pull requests across 20+ production repositories.
+- Earlier roles include Lead Software Engineer at 3Pillar Global (Sep 2020–Oct 2021), United Virtualities (Aug 2019–Aug 2020), Tech Lead, B2B at Reservamos/reserhub (Aug 2018–Aug 2019), and Staff Engineering Manager / Lead Engineer at MagmaLabs (Feb 2016–Aug 2018).
 
 Career and Dealerware figures come from the PDF résumé linked above.
 
@@ -27,6 +29,9 @@ Career and Dealerware figures come from the PDF résumé linked above.
 - rails-ai-bridge: Rails context files and read-only MCP introspection for AI coding assistants. https://github.com/igmarin/rails-ai-bridge — more than 10,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/rails-ai-bridge
 - ruby-skill-bench: Compares AI agent runs with and without added context in isolated Git workspaces, using blind judging. https://github.com/igmarin/ruby-skill-bench — more than 3,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/ruby-skill-bench
 - brigid: Rust CLI for guided codebase tutorials. https://github.com/igmarin/brigid
+- rs-guard: I contribute to this Nebula Ideas Rust CLI for multi-provider AI code review in GitHub pull requests and local workflows. https://github.com/nebulaideas/rs-guard
+- rust-core-skills: Rust agent skills covering ownership, type-driven design, error handling, project context, and Cargo testing. https://github.com/igmarin/rust-core-skills
+- pi-vida: Launcher for language-specific coding-agent setups, combining skills, a safety gate, and ticket tracking across Pi and other supported hosts. https://github.com/igmarin/pi-vida
 - elixir-phoenix-skills: Guidance for AI coding assistants working with Phoenix, LiveView, and Ecto. https://github.com/igmarin/elixir-phoenix-skills
 
 ## Writing and media

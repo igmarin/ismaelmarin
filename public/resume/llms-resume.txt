@@ -4,11 +4,12 @@
 
 - Public name: Ismael Marin
 - Full name: Ismael Guillermo Marín Cabrera
-- Other name variants: Ismael Guillermo Marin Cabrera; Ismael Guillermo Marin; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín
+- Other name variants: Ismael Guillermo Marin; Ismael Guillermo Marin Cabrera; Ismael G. Marín C.; Ismael G. Marín Cabrera; Ismael G. Marin Cabrera; Ismael Marín; Ismael Marin
 - Location: León, Guanajuato, Mexico; available for remote work
 - Email: ismael.marin@gmail.com
 - Phone: +52 477 792 9000
 - Portfolio: https://ismaelmarin.dev/
+- Portfolio bridge: https://igmarin.github.io/
 - HTML résumé: https://ismaelmarin.dev/resume/
 - PDF résumé: https://ismaelmarin.dev/resume/ismael-marin-resume.pdf
 - GitHub: https://github.com/igmarin
@@ -22,7 +23,7 @@ Software engineer and technical leader with experience building backend systems,
 
 ## Skills
 
-- Backend: Ruby on Rails, Rust, Elixir/Phoenix, Python, Hanami, PostgreSQL, Redis, Docker, AWS, APIs, and system architecture.
+- Backend: Ruby on Rails, Rust, Elixir/Phoenix, Python, Hanami, PostgreSQL, Redis, Sidekiq, OpenSearch, Docker, AWS, APIs, and system architecture.
 - AI and developer tools: MCP, Rails context and read-only introspection, LLM integration, agent evaluation.
 - Leadership: engineering teams, ADRs/RFCs, mentoring, product planning, and TDD.
 
@@ -41,8 +42,20 @@ Advises startups and product teams on architecture, backend modernization, AI ad
 
 Career and Dealerware figures are documented in the PDF résumé linked above.
 
+### Earlier roles
+
+- 3Pillar Global — Lead Software Engineer (Sep 2020–Oct 2021): Designed internationalization across backend, frontend, and third-party integrations; modernized Rails systems using clearer domain boundaries and automated tests.
+- United Virtualities — Lead Software Engineer (Aug 2019–Aug 2020): Led engagements from discovery and architecture through implementation and AWS deployment.
+- Reservamos / reserhub — Tech Lead, B2B (Aug 2018–Aug 2019): Helped grow the B2B product area and led partner integrations and white-label delivery.
+- MagmaLabs — Staff Engineering Manager / Lead Engineer (Feb 2016–Aug 2018): Led Rails commerce delivery and engineering development, including mentoring through Hacker Academy.
+
 ## Selected open-source work
 
 - rails-ai-bridge: Rails context and read-only MCP introspection. https://github.com/igmarin/rails-ai-bridge — more than 10,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/rails-ai-bridge
 - ruby-skill-bench: Isolated agent comparisons with and without added context, assessed through blind judging. https://github.com/igmarin/ruby-skill-bench — more than 3,000 total RubyGems downloads as of 2026-09-25 UTC: https://rubygems.org/gems/ruby-skill-bench
+- brigid: Rust CLI that turns codebases into guided tutorials. https://github.com/igmarin/brigid
+- rs-guard: I contribute to this Nebula Ideas Rust CLI for multi-provider AI code review in GitHub pull requests and local workflows. https://github.com/nebulaideas/rs-guard
+- rust-core-skills: Rust agent skills covering ownership, type-driven design, error handling, project context, and Cargo testing. https://github.com/igmarin/rust-core-skills
+- pi-vida: Launcher for language-specific coding-agent setups, combining skills, a safety gate, and ticket tracking across Pi and other supported hosts. https://github.com/igmarin/pi-vida
+- elixir-phoenix-skills: Agent skills for idiomatic Elixir and work with Phoenix, LiveView, and Ecto. https://github.com/igmarin/elixir-phoenix-skills
 - agent-mcp-runtime: Rust CLI for managing MCP connections and LLM tool-calling loops. https://github.com/igmarin/agent-mcp-runtime
